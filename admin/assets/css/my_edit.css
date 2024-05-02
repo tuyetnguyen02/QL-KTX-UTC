@@ -1,0 +1,170 @@
+/* danh sach loai phong */
+.img_admin{
+    width: 220px;
+    height: 150px;
+}
+/* .img_admin img{
+    width: 220px;
+    height: 150px;
+    border-radius: 0%;
+} */
+
+
+.chucvu::placeholder{
+    opacity: 0.5;
+}
+
+/* css for chi_tiet_loai_phong.php start */
+/* modal add room in roomtype start */
+
+#addroom-wrapper{
+    min-height: 20vh;
+}
+#addroom-modal-container{
+    
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    background: rgba(0,0,0, 0.5);
+    height: 100vh;
+    /* display: flex;
+    justify-content: center; */
+    /* default  */
+    opacity: 0;
+    pointer-events: none;
+    transition: all 0.3s ease-in-out;
+}
+#addroom-modal-container.show{
+    opacity: 1;
+    pointer-events:all;
+}
+.addroom-modal{
+    padding-top: 1.5rem;
+    padding-bottom: 0.5rem;
+    position: relative;
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    max-width: 500px;
+    background: #fff;
+    box-shadow: 0 2px 4px rgba(0,0,0, 0.3);
+    transition: all 0.25s ease-in-out;
+}
+#addroom-modal-container.show .addroom-modal{
+    top: 100px;
+}
+/* modal add room in roomtype end */
+
+/* modal edit room type start*/
+#editroom-wrapper{
+    min-height: 20vh;
+}
+#editroom-modal-container{
+    
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    background: rgba(0,0,0, 0.5);
+    height: 100vh;
+    /* display: flex;
+    justify-content: center; */
+    /* default  */
+    opacity: 0;
+    pointer-events: none;
+    transition: all 0.3s ease-in-out;
+}
+#editroom-modal-container.show{
+    opacity: 1;
+    pointer-events:all;
+}
+.editroom-modal{
+    padding-top: 1.5rem;
+    padding-bottom: 0.5rem;
+    position: relative;
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    max-width: 500px;
+    background: #fff;
+    box-shadow: 0 2px 4px rgba(0,0,0, 0.3);
+    transition: all 0.25s ease-in-out;
+}
+#editroom-modal-container.show .editroom-modal{
+    top: 60px;
+}
+/* modal edit room type end */
+/* css for chi_tiet_loai_phong.php end */
+
+/* css for roomtype :start */
+/* modal add room in roomtype start */
+
+.addroomtype-nodal{
+    padding-top: 1.5rem;
+    padding-bottom: 0.5rem;
+    position: relative;
+    top: 0;
+    left: 58%;
+    transform: translateX(-50%);
+    max-width: 1000px;
+    background: #fff;
+    box-shadow: 0 2px 4px rgba(0,0,0, 0.3);
+    transition: all 0.25s ease-in-out;
+}
+#addroom-modal-container.show .addroom-modal{
+    top: 100px;
+}
+/* modal add room in roomtype end */
+/* css for roomtype :end */
+
+.table thead th{
+    font-weight: bold;
+    background-color: antiquewhite;
+    border-top: 2px solid rgba(151, 151, 151, 0.3); 
+    border-bottom: 2px solid rgba(151, 151, 151, 0.3); 
+}
+.table tbody tr{
+    
+    background-color:#fff;
+}
+
+/* modal edit bill start*/
+#editbill-wrapper{
+    min-height: 20vh;
+}
+#editbill-modal-container{
+    
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    background: rgba(0,0,0, 0.5);
+    height: 100vh;
+    /* display: flex;
+    justify-content: center; */
+    /* default  */
+    opacity: 0;
+    pointer-events: none;
+    transition: all 0.3s ease-in-out;
+}
+#editbill-modal-container.show{
+    opacity: 1;
+    pointer-events:all;
+}
+.editbill-modal{
+    padding-top: 1.5rem;
+    padding-bottom: 0.5rem;
+    position: relative;
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    max-width: 500px;
+    background: #fff;
+    box-shadow: 0 2px 4px rgba(0,0,0, 0.3);
+    transition: all 0.25s ease-in-out;
+}
+#editbill-modal-container.show .editbill-modal{
+    top: 100px;
+}
+/* modal edit bill end */
