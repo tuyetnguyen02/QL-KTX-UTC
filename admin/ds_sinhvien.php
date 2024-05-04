@@ -27,7 +27,7 @@ $student = queryResult($conn, $sql_student);
                     </div>
                     <!-- <h4 class="card-title">QUẢN LÝ LOẠI PHÒNG</h4>
                     <li class="breadcrumb-item"><a href="#">Thêm loại phòng</a></li> -->
-                    <table class="table table-hover">
+                    <table class="table table-hover" id="ds_sinhvien">
                         <thead>
                             <tr>
                                 <th>STT</th>
@@ -66,6 +66,24 @@ $student = queryResult($conn, $sql_student);
         </div>
     </div>
     <!-- content-wrapper ends -->
-    
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script>
+        // sử lý tìm kiếm với ajax
+        $(document).ready(function(){
+            $("#timkiem").on('input', function(event){
+                event.preventDefault();
+                var giatri = $(this).val();
+                $.ajax({
+                    url: "ajax/search_student.php",
+                    type: "GET",
+                    data: { giatri: giatri },
+                    success: function(data){
+                        $("#ds_sinhvien").html(data);
+                    }
+                });
+                return false;
+            });
+        });
+    </script>
 
 <?php require(__DIR__.'/layouts/footer.php'); ?> 

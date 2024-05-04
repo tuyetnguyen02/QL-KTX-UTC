@@ -22,12 +22,12 @@ $feedback = mysqli_query($conn, $sql_feedback);
       <span class="mdi mdi-menu"></span>
     </button>
     <div class="search-field d-none d-xl-block">
-      <form class="d-flex align-items-center h-100" action="#">
+      <form class="d-flex align-items-center h-100" id="searchForm">
         <div class="input-group">
           <div class="input-group-prepend bg-transparent">
             <i class="input-group-text border-0 mdi mdi-magnify"></i>
           </div>
-          <input type="text" class="form-control bg-transparent border-0" placeholder="Search products">
+          <input type="text" id="timkiem" class="form-control bg-transparent border-0" placeholder="Search products">
         </div>
       </form>
     </div>

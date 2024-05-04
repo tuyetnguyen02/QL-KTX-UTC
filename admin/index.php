@@ -68,7 +68,7 @@ if(isset($_GET['trang'])){
                                 <th>Tác vụ</th>
                             </tr>
                         </thead>
-                        <tbody>
+                        <tbody id="ds_loaiphong">
                             <?php while($row = $loaiphong->fetch_assoc()){ ?>
                             <tr>
                                 <td><?php echo $i; $i++;?></td>
@@ -97,6 +97,7 @@ if(isset($_GET['trang'])){
                             </tr>
                         </thead>
                     </table>
+                    <!-- phân trang cho table -->
                     <nav aria-label="Page navigation example">
                         <br>
                         <br>
@@ -179,7 +180,7 @@ if(isset($_GET['trang'])){
                                                         </div>
                                                         <div class="col-sm-6 form-group row">
                                                             <div class="form-group row col-sm-12">
-                                                                <label for="exampleInputEmail2" style="color:black;" class="col-sm-3 col-form-label">Nấu ăn</label>
+                                                                <label style="color:black;" class="col-sm-3 col-form-label">Nấu ăn</label>
                                                                 <div class="col-sm-9">
                                                                     <select class="form-control" id="exampleSelectGender" required name="is_cooked">
                                                                         <!-- <option value=""></option> -->
@@ -189,7 +190,7 @@ if(isset($_GET['trang'])){
                                                                 </div>
                                                             </div>
                                                             <div class="form-group row col-sm-12">
-                                                                <label for="exampleInputMobile" style="color:black;" class="col-sm-3 col-form-label">Trang bị điều hoà</label>
+                                                                <label style="color:black;" class="col-sm-3 col-form-label">Trang bị điều hoà</label>
                                                                 <div class="col-sm-9">
                                                                     <select class="form-control" id="exampleSelectGender" required name="is_air_conditioned">
                                                                         <!-- <option value=""></option> -->
@@ -199,7 +200,7 @@ if(isset($_GET['trang'])){
                                                                 </div>
                                                             </div>
                                                             <div class="form-group row col-sm-12">
-                                                                <label for="exampleInputEmail2" style="color:black;" class="col-sm-3 col-form-label">Trạng thái phòng</label>
+                                                                <label style="color:black;" class="col-sm-3 col-form-label">Trạng thái phòng</label>
                                                                 <div class="col-sm-9">
                                                                     <select class="form-control" id="exampleSelectGender" required name="enable">
                                                                         <!-- <option value=""></option> -->
@@ -231,6 +232,7 @@ if(isset($_GET['trang'])){
 
     </div>
     <!-- content-wrapper ends -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script>
         const open = document.getElementById('addroom-btn-open');
         // console.log(show);
@@ -243,6 +245,23 @@ if(isset($_GET['trang'])){
         });
         close.addEventListener('click', ()=>{
             modal_container.classList.remove('show');
+        });
+
+        // sử lý tìm kiếm với ajax
+        $(document).ready(function(){
+            $("#timkiem").on('input', function(event){
+                event.preventDefault();
+                var giatri = $(this).val();
+                $.ajax({
+                    url: "ajax/search_roomtype.php",
+                    type: "GET",
+                    data: { giatri: giatri },
+                    success: function(data){
+                        $("#ds_loaiphong").html(data);
+                    }
+                });
+                return false;
+            });
         });
     </script>
 

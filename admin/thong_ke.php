@@ -10,7 +10,7 @@ $sql_maxquantity = "SELECT SUM(rt.max_quantity * room_count.num_rooms) AS total_
                                 FROM room GROUP BY room_type_id ) room_count ON rt.room_type_id = room_count.room_type_id;";
 $maxquantity = mysqli_query($conn, $sql_maxquantity)->fetch_assoc();
 // tổng số sinh viên đăng kí theo loại phòng MẢNG 3 CHIỀU
-$sql_sum_sv_roomtype = "SELECT rt.room_type_id, rt.room_type_name, COUNT(r.room_id) * rt.max_quantity AS total_capacity, COALESCE(COUNT(c.student_id), 0) AS num_students_registered FROM room_type rt LEFT JOIN room r ON rt.room_type_id = r.room_type_id LEFT JOIN contract c ON r.room_id = c.room_id AND c.status = 'true' GROUP BY rt.room_type_id, rt.room_type_name, rt.max_quantity;";
+$sql_sum_sv_roomtype = "SELECT rt.room_type_id, rt.room_type_name, COUNT(r.room_id) * rt.max_quantity AS total_capacity, COALESCE(COUNT(c.student_id), 0) AS num_students_registered FROM room_type rt LEFT JOIN room r ON rt.room_type_id = r.room_type_id LEFT JOIN contract c ON r.room_id = c.room_id AND c.status = true GROUP BY rt.room_type_id, rt.room_type_name, rt.max_quantity;";
 $sum_sv_roomtype = mysqli_query($conn, $sql_sum_sv_roomtype);
 $data_roomtype = [];
 while($row = mysqli_fetch_array($sum_sv_roomtype)){
