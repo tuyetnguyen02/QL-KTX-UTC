@@ -9,6 +9,11 @@ INNER JOIN semester sem ON sem.semester_id = c.semester_id
 WHERE c.status = true AND sem.status = true ";
 $student = queryResult($conn, $sql_student);
 
+
+// Lọc chuyên ngành
+$sql_major = "SELECT major FROM student GROUP BY major";
+$major = mysqli_query($conn, $sql_major);
+
 ?>
 
 <div class="main-panel"><!--style="padding : 20px 10px; box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);" -->
@@ -25,9 +30,58 @@ $student = queryResult($conn, $sql_student);
                             </ol>
                         </nav> -->
                     </div>
+                    <div class="row">
+                        <!-- Lọc danh dách sinh viên theo từng loại tiêu chí -->
+                        <!-- <form action="" id="loc_dssv"> -->
+                            <div class="col-sm-3">
+                                <div class="filter-group">
+                                    <label style="font-weight: bold">
+                                        <i class="fa fa-user-friends">Khoá : </i> 
+                                    </label>
+                                    <select id="loc_khoa" style="width: 135px;">
+                                        <option value="" style="display: none;"></option>
+                                        <option value="K60">K60</option> 
+                                        <option value="K61">K61</option> 
+                                        <option value="K62">K62</option>
+                                        <option value="K63">K63</option> 
+                                        <option value="K64">K64</option> 
+                                    </select>
+                                    
+                                </div>
+                            </div>
+                            <div class="col-sm-3">
+                                <div class="filter-group">
+                                    <label style="font-weight: bold">
+                                        <i class="fa fa-user-friends">Chuyên ngành : </i> 
+                                    </label>
+                                    <select id="loc_nganh" style="width: 135px;">
+                                        <option value="" style="display: none;"></option>
+                                        <?php while($row = $major->fetch_assoc()){ ?>
+                                            <option value="<?php echo $row['major'];?>"><?php echo $row['major'];?></option> 
+                                            <?php } ?>
+                                    </select>
+                                    
+                                </div>
+                            </div>
+                            <div class="col-sm-3">
+                                <div class="filter-group">
+                                    <label style="font-weight: bold">
+                                        <i class="fa fa-user-friends">Giới tính : </i> 
+                                    </label>
+                                    <select id="loc_gioitinh" style="width: 135px;">
+                                        <option value="" style="display: none;"></option>
+                                        <option value="0">Nam</option>
+                                        <option value="1">Nữ</option>
+                                    </select>
+                                    
+                                </div>
+                            </div>    
+                        <!-- </form> -->
+                        
+                    </div>
                     <!-- <h4 class="card-title">QUẢN LÝ LOẠI PHÒNG</h4>
                     <li class="breadcrumb-item"><a href="#">Thêm loại phòng</a></li> -->
-                    <table class="table table-hover" id="ds_sinhvien">
+                    <table class="table table-hover" >
                         <thead>
                             <tr>
                                 <th>STT</th>
@@ -35,7 +89,7 @@ $student = queryResult($conn, $sql_student);
                                 <th>Họ và Tên</th>
                                 <th>Ngày sinh</th>
                                 <th>Phòng (Loại phòng)</th>
-                                <th>Lớp (Ngành)</th>
+                                <th>Ngành (Lớp)</th>
                                 <th>Số điện thoại</th>
                                 <th>Email</th>
                                 <th>Quê quán</th>
@@ -43,7 +97,7 @@ $student = queryResult($conn, $sql_student);
                                 <th>Tác vụ</th>
                             </tr>
                         </thead>
-                        <tbody>
+                        <tbody id="ds_sinhvien">
                             <?php while($row = $student->fetch_assoc()){ ?>
                             <tr>
                                 <td><?php echo $i; $i++;?></td>
@@ -79,6 +133,63 @@ $student = queryResult($conn, $sql_student);
                     data: { giatri: giatri },
                     success: function(data){
                         $("#ds_sinhvien").html(data);
+                        $("#loc_khoa, #loc_nganh, #loc_gioitinh").val("");
+                    }
+                });
+                return false;
+            });
+        });
+
+        //AJAX XỬ LÍ LỌC SV THEO TIÊU CHÍ
+        $(document).ready(function(){
+            $("#loc_khoa").on('input', function(event){
+                event.preventDefault();
+                var giatri = $(this).val();
+                var loc_nganh = $("#loc_nganh").val();
+                var loc_gioitinh = $("#loc_gioitinh").val();
+                $.ajax({
+                    url: "ajax/loc_khoa.php",
+                    type: "GET",
+                    data: { giatri: giatri ,loc_nganh:loc_nganh, loc_gioitinh: loc_gioitinh},// 
+                    success: function(data){
+                        $("#ds_sinhvien").html(data);
+                        $("#timkiem").val("");
+                    }
+                });
+                return false;
+            });
+        });
+        $(document).ready(function(){
+            $("#loc_nganh").on('input', function(event){
+                event.preventDefault();
+                var giatri = $(this).val();
+                var loc_khoa = $("#loc_khoa").val();
+                var loc_gioitinh = $("#loc_gioitinh").val();
+                $.ajax({
+                    url: "ajax/loc_nganh.php",
+                    type: "GET",
+                    data: { giatri: giatri ,loc_khoa:loc_khoa, loc_gioitinh: loc_gioitinh},
+                    success: function(data){
+                        $("#ds_sinhvien").html(data);
+                        $("#timkiem").val("");
+                    }
+                });
+                return false;
+            });
+        });
+        $(document).ready(function(){
+            $("#loc_gioitinh").on('input', function(event){
+                event.preventDefault();
+                var giatri = $(this).val();
+                var loc_khoa = $("#loc_khoa").val();
+                var loc_nganh = $("#loc_nganh").val();
+                $.ajax({
+                    url: "ajax/loc_gioitinh.php",
+                    type: "GET",
+                    data: { giatri: giatri ,loc_khoa:loc_khoa, loc_nganh: loc_nganh},
+                    success: function(data){
+                        $("#ds_sinhvien").html(data);
+                        $("#timkiem").val("");
                     }
                 });
                 return false;
