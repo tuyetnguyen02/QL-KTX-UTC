@@ -6,6 +6,22 @@
     $sv = mysqli_query($conn, $sql_sv)->fetch_assoc();
     $msv = $sv['student_id'];
 
+    // check contract trước khi cấp phép đăng ký
+    $sql_contract = "SELECT * FROM contract WHERE student_id = '".$msv."'";
+    $result_contract = mysqli_query($conn, $sql_contract);
+    
+    if($result_contract && mysqli_num_rows($result_contract) > 0) {
+        $contract = mysqli_fetch_assoc($result_contract);
+        if($contract['status'] == 0 || $contract['status'] == 1){
+            $check_contract = true;
+        }else{
+            $check_contract = false;
+        }
+        
+    } else {
+        $check_contract = false;
+    }
+
     $sql_semester = "SELECT * FROM semester WHERE status = true";
     $semester = mysqli_query($conn, $sql_semester)->fetch_assoc();
 
@@ -148,7 +164,7 @@
                         </form>
                         <button class="btn-dang-ki" onclick="GuiXedap('<?php echo $check_xedap;?>','<?php echo $check_xemay;?>'
                                                         ,'<?php echo $semester['semester_id'];?>','<?php echo $xedap['services_id'];?>'
-                                                        ,'<?php echo $xedap['price'];?>')">
+                                                        ,'<?php echo $xedap['price'];?>','<?php echo $check_contract;?>')">
                             Đăng ký
                         </button>
                         
@@ -183,7 +199,7 @@
                         
                         <button class="btn-dang-ki" onclick="GuiXemay('<?php echo $check_xedap;?>','<?php echo $check_xemay;?>'
                                                         ,'<?php echo $semester['semester_id'];?>','<?php echo $xemay['services_id'];?>'
-                                                        ,'<?php echo $xemay['price'];?>')">
+                                                        ,'<?php echo $xemay['price'];?>','<?php echo $check_contract;?>')">
                             Đăng ký
                         </button>
 
@@ -215,7 +231,7 @@
                         />
                         </form>
                         <button class="btn-dang-ki" onclick="VeSinh('<?php echo $check_vesinh;?>','<?php echo $semester['semester_id'];?>'
-                                                                ,'<?php echo $vesinh['services_id'];?>','<?php echo $vesinh['price'];?>')">
+                                                                ,'<?php echo $vesinh['services_id'];?>','<?php echo $vesinh['price'];?>','<?php echo $check_contract;?>')">
                             Đăng ký
                         </button>
                         
@@ -230,48 +246,62 @@
     </div>
 </main>
 <script>
-    function GuiXedap(check_xedap, check_xemay, semester_id, services_id, price){
-        if(check_xemay){
-            alert("Đăng kí thất bại. Bạn đã đăng kí gửi xe máy rồi");
-            window.location.href = 'thong_tin_ca_nhan.php';
-        }else{
-            if(check_xedap){
-                alert("Đăng kí thất bại. Bạn đã đăng kí gửi xe đạp rồi");
+    function GuiXedap(check_xedap, check_xemay, semester_id, services_id, price, check_contract){
+        if(check_contract == true){
+            if(check_xemay){
+                alert("Đăng kí thất bại. Bạn đã đăng kí gửi xe máy rồi");
                 window.location.href = 'thong_tin_ca_nhan.php';
             }else{
+                if(check_xedap){
+                    alert("Đăng kí thất bại. Bạn đã đăng kí gửi xe đạp rồi");
+                    window.location.href = 'thong_tin_ca_nhan.php';
+                }else{
+                    window.location.href = 'action/dangky_dichvu.php?semester_id='+semester_id + '&services_id='+services_id +'&price=' + price ;
+                }
+            }
+        }else{
+            alert("Bạn cần đăng ký thành công ở KTX trước");
+            window.location.href = 'thong_tin_ca_nhan.php';
+        }
+    }
+    function GuiXemay(check_xedap, check_xemay, semester_id, services_id, price, check_contract){
+        if(check_contract == true){
+            if(check_xedap){
+                alert("Đăng kí thất bại. Bạn đã đăng kí dịch vụ gửi xe đạp!");
+                window.location.href = 'thong_tin_ca_nhan.php';
+            }else{
+                if(check_xemay){
+                    alert("Đăng kí thất bại. Bạn đã đăng kí dịch vụ gửi xe máy!");
+                    window.location.href = 'thong_tin_ca_nhan.php';
+                }else{
+                    var bien_soxe = document.getElementById("bien_soxe").value;
+                    //alert("Đăng kí thất bại" + bien_soxe);
+                    var regex = /^[0-9]{2}[A-Z][0-9]{5}$/; // Biểu thức chính quy để kiểm tra định dạng
+                    if (regex.test(bien_soxe)) {
+                        window.location.href = 'action/dangky_dichvu.php?semester_id='+semester_id + '&services_id='+services_id +'&price=' + price + '&bien_soxe=' + bien_soxe ;
+                    } else {
+                        alert("Định dạng biển số không đúng");
+                    }
+                    
+                }
+            }
+        }else{
+            alert("Bạn cần đăng ký thành công ở KTX trước");
+            window.location.href = 'thong_tin_ca_nhan.php';
+        }
+    }
+    function VeSinh(check_vesinh, semester_id, services_id, price, check_contract){
+        if(check_contract == true){
+            if(check_vesinh){
+                alert("Đăng kí thất bại. Bạn đã đăng kí dịch vụ vệ sinh!");
+                window.location.href = 'thong_tin_ca_nhan.php';
+            }else{
+                //alert("Đăng kí thành công!"+price);
                 window.location.href = 'action/dangky_dichvu.php?semester_id='+semester_id + '&services_id='+services_id +'&price=' + price ;
             }
-        }
-        
-    }
-    function GuiXemay(check_xedap, check_xemay, semester_id, services_id, price){
-        if(check_xedap){
-            alert("Đăng kí thất bại. Bạn đã đăng kí dịch vụ gửi xe đạp!");
-            window.location.href = 'thong_tin_ca_nhan.php';
         }else{
-            if(check_xemay){
-                alert("Đăng kí thất bại. Bạn đã đăng kí dịch vụ gửi xe máy!");
-                window.location.href = 'thong_tin_ca_nhan.php';
-            }else{
-                var bien_soxe = document.getElementById("bien_soxe").value;
-                //alert("Đăng kí thất bại" + bien_soxe);
-                var regex = /^[0-9]{2}[A-Z][0-9]{5}$/; // Biểu thức chính quy để kiểm tra định dạng
-                if (regex.test(bien_soxe)) {
-                    window.location.href = 'action/dangky_dichvu.php?semester_id='+semester_id + '&services_id='+services_id +'&price=' + price + '&bien_soxe=' + bien_soxe ;
-                } else {
-                    alert("Định dạng biển số không đúng");
-                }
-                
-            }
-        }
-    }
-    function VeSinh(check_vesinh, semester_id, services_id, price){
-        if(check_vesinh){
-            alert("Đăng kí thất bại. Bạn đã đăng kí dịch vụ vệ sinh!");
+            alert("Bạn cần đăng ký thành công ở KTX trước");
             window.location.href = 'thong_tin_ca_nhan.php';
-        }else{
-            //alert("Đăng kí thành công!"+price);
-            window.location.href = 'action/dangky_dichvu.php?semester_id='+semester_id + '&services_id='+services_id +'&price=' + price ;
         }
     }
 </script>

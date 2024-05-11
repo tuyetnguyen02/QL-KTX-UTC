@@ -102,28 +102,28 @@ if(isset($_GET['trang'])){
                         </tbody>
                     </table>  
                     <nav aria-label="Page navigation example">
-            <br>
-            <br>
-            <ul class="pagination" style="justify-content: center;">
-                <?php if(isset($_GET['trang'])){ ?>
-                    <li class="page-item"><a class="page-link" href="./sua_chua_vat_chat.php?trang=<?php echo $_GET['trang'] - 1; ?>">Trước</a></li>
-                <?php }else{ ?>
-                    <li class="page-item"><a class="page-link" href="#">Trước</a></li>
-                <?php } ?>
-                <?php for($i = 1; $i <= $sotrang; $i++){ ?>
-                    <?php if($i == 1){ ?>
-                        <li class="page-item" <?php //if($_GET['trang'] == $sotrang){echo 'style="font-weight: bold";';} ?>><a class="page-link" href="./sua_chua_vat_chat.php"><?php echo $i; ?></a></li>
-                    <?php }else{ ?>
-                        <li class="page-item" <?php //if($_GET['trang'] == $sotrang){echo 'style="font-weight: bold";';} ?>><a class="page-link" href="./sua_chua_vat_chat.php?trang=<?php echo $i; ?>"><?php echo $i; ?></a></li>
-                    <?php } ?>
-                <?php } ?>
-                <?php if(isset($_GET['trang']) && $sotrang >= 2 && $sotrang != $_GET['trang']){ ?>
-                    <li class="page-item"><a class="page-link" href="./sua_chua_vat_chat.php?trang=<?php echo $_GET['trang'] + 1; ?>">Sau</a></li>
-                <?php }else{ ?>
-                    <li class="page-item"><a class="page-link" href="#">Sau</a></li>
-                <?php } ?>
-            </ul>
-        </nav>  
+                        <br>
+                        <br>
+                        <ul class="pagination" style="justify-content: center;">
+                            <?php if(isset($_GET['trang'])){ ?>
+                                <li class="page-item"><a class="page-link" href="./sua_chua_vat_chat.php?trang=<?php echo $_GET['trang'] - 1; ?>">Trước</a></li>
+                            <?php }else{ ?>
+                                <li class="page-item"><a class="page-link" href="#">Trước</a></li>
+                            <?php } ?>
+                            <?php for($i = 1; $i <= $sotrang; $i++){ ?>
+                                <?php if($i == 1){ ?>
+                                    <li class="page-item" <?php //if($_GET['trang'] == $sotrang){echo 'style="font-weight: bold";';} ?>><a class="page-link" href="./sua_chua_vat_chat.php"><?php echo $i; ?></a></li>
+                                <?php }else{ ?>
+                                    <li class="page-item" <?php //if($_GET['trang'] == $sotrang){echo 'style="font-weight: bold";';} ?>><a class="page-link" href="./sua_chua_vat_chat.php?trang=<?php echo $i; ?>"><?php echo $i; ?></a></li>
+                                <?php } ?>
+                            <?php } ?>
+                            <?php if(isset($_GET['trang']) && $sotrang >= 2 && $sotrang != $_GET['trang']){ ?>
+                                <li class="page-item"><a class="page-link" href="./sua_chua_vat_chat.php?trang=<?php echo $_GET['trang'] + 1; ?>">Sau</a></li>
+                            <?php }else{ ?>
+                                <li class="page-item"><a class="page-link" href="#">Sau</a></li>
+                            <?php } ?>
+                        </ul>
+                    </nav>  
                 </div>
             </div>
             <div class="row">

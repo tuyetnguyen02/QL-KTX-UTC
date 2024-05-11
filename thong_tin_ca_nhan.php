@@ -34,6 +34,15 @@ if($contract){
     $sql_roomtype = "SELECT * FROM room_type WHERE room_type_id = '".$room_type_id."'";
     $room_type = mysqli_query($conn, $sql_roomtype)->fetch_assoc();
 
+    // hiển thị hoá đoan điện nước
+    $sql_bill = "SELECT * FROM bill b
+    LEFT JOIN room r ON r.room_id = b.room_id
+    LEFT JOIN student s ON s.student_id = b.student_id
+    LEFT JOIN admin ad ON ad.admin_id = b.admin_id1
+    LEFT JOIN admin a ON a.admin_id = b.admin_id2
+    WHERE b.room_id = '".$room_id."' AND created_date > '".$semester['start_date']."'";
+    $bill = mysqli_query($conn, $sql_bill);
+
 }
 // gọi data cho dịch vụ gửi xe máy, xe đạp và dịch vụ dọn vệ sinh
 $sql_services_guixemay = "SELECT * FROM services WHERE services_name = 'Gửi xe máy'";
@@ -85,14 +94,7 @@ if($_SERVER['REQUEST_METHOD'] == 'POST'){
 
             </script>';
 }
-// hiển thị hoá đoan điện nước
-$sql_bill = "SELECT * FROM bill b
-            LEFT JOIN room r ON r.room_id = b.room_id
-            LEFT JOIN student s ON s.student_id = b.student_id
-            LEFT JOIN admin ad ON ad.admin_id = b.admin_id1
-            LEFT JOIN admin a ON a.admin_id = b.admin_id2
-            WHERE b.room_id = '".$room_id."' AND created_date > '".$semester['start_date']."'";
-$bill = mysqli_query($conn, $sql_bill);
+
 
 
 // biến total_dicvu : tính tổng tiền cần thanh toán
@@ -222,17 +224,40 @@ $total_dichvu = 0;
                                                     </div>
                                                     <div class="col-12  mb--30 aaaaa">
                                                         <p class="col-2 " >Trạng thái </p>
-                                                        <p>:</p><?php if($contract['status']){?>
-                                                            <p class="col-8 text-success" >Đã thanh toán</p>
-                                                        <?php } else { $total_dichvu += $room_type['price'];?>
-                                                            <p class="col-3 text-warning" >Chưa thanh toán</p>
-                                                            <p class="col-3 text-warning" ><a href="xu_ly_thanh_toan.php?total_price=<?php echo $room_type['price'];?>&contract_id=<?php echo $contract['contract_id'];?>">Thanh toán</a></p>
-                                                            <p class="col-1" style="color : red;"><a href="">Huỷ</a></p>
+                                                        <p>:</p><?php 
+                                                            switch($contract['status']) {
+                                                                case 1:
+                                                                    ?>
+                                                                    <p class="col-8 text-success" >Đã thanh toán</p>
+                                                                    <?php
+                                                                    break;
+                                                                case 0:
+                                                                    $total_dichvu += $room_type['price'];
+                                                                    ?>
+                                                                    <p class="col-3 text-warning" >Chưa thanh toán</p>
+                                                                    <p class="col-3 text-warning" ><a href="xu_ly_thanh_toan.php?total_price=<?php echo $room_type['price'];?>&contract_id=<?php echo $contract['contract_id'];?>">Thanh toán</a></p>
+                                                                    <!-- <p class="col-1" style="color : red;"><a href="">Huỷ</a></p> -->
+                                                                    <?php
+                                                                    break;
+                                                                case 2:
+                                                                    ?>
+                                                                    <p class="col-6 text-warning" >Đợi phê duyệt đơn đăng ký</p>
+                                                                    <?php
+                                                                    break;
+                                                                case 3:
+                                                                    ?>
+                                                                    <p class="col-6 text-warning" >Đơn đăng ký không hợp lệ</p>
+                                                                    <p class="col-1" style="color : red;"><a href="">Huỷ</a></p>
+                                                                    <?php
+                                                                    break;  
+                                                                default:
+                                                                    ?>
+                                                                    <p class="col-9 " style="color: blue;">Chưa đăng kí dịch vụ</p>
+                                                                    <?php
+                                                                    break;
+                                                            }
+                                                            ?>
                                                         <?php } ?>
-                                                         <?php } else { ?>
-                                                            <p class="col-9 " >Chưa đăng kí dịch vụ</p>
-                                                            <?php } ?> <!--đưa thẻ p col-9 style blue -->
-                                                        
                                                     </div>
                                                     <div class="col-12">
                                                         <p class="col-12" style="border-top: 1px dotted #000;"></p>
@@ -273,19 +298,30 @@ $total_dichvu = 0;
                                                             <p class="col-9 " >Chưa đăng kí dịch vụ</p>
                                                             <?php }?>
                                                     </div>
-
-                                                    <div class="col-12 mb--20 row" >
+                                                    <?php if($total_dichvu != 0): ?>
+                                                        <div class="col-12 mb--20 row">
+                                                            <div class="col-sm-7"></div>
+                                                            <form method="POST" target="_blank" enctype="application/x-www-form-urlencoded" action="xu_ly_thanh_toan.php?total_price=<?php echo $total_dichvu;  
+                                                                if(isset($contract['status']) && !$contract['status']) echo '&contract_id='.$contract['contract_id'];
+                                                                if(isset($vesinh['status']) && !$vesinh['status']) echo '&register_vesinh_id='.$vesinh['register_services_id'];
+                                                                if(isset($guixe_may['status']) && !$guixe_may['status']) echo '&register_xemay_id='.$guixe_may['register_services_id'];
+                                                                if(isset($guixe_dap['status']) && !$guixe_dap['status']) echo '&register_xedap_id='.$guixe_dap['register_services_id'];
+                                                                ?>">
+                                                                <button type="submit" class="btn btn--primary" style="padding: 5px 10px;">Thanh toán toàn bộ</button>
+                                                            </form><br>
+                                                        </div>
+                                                    <?php endif; ?>
+                                                    <!-- <div class="col-12 mb--20 row" >
                                                         <div class="col-sm-7"></div>
-                                                        <form method="POST" target="_blank" enctype="application/x-www-form-urlencoded" action="xu_ly_thanh_toan.php?total_price=<?php echo $total_dichvu;  
-                                                                                                                                                    if(isset($contract['status']) && !$contract['status']) echo '&contract_id='.$contract['contract_id'];
-                                                                                                                                                    if(isset($vesinh['status']) && !$vesinh['status']) echo '&register_vesinh_id='.$vesinh['register_services_id'];
-                                                                                                                                                    if(isset($guixe_may['status']) && !$guixe_may['status']) echo '&register_xemay_id='.$guixe_may['register_services_id'];
-                                                                                                                                                    if(isset($guixe_dap['status']) && !$guixe_dap['status']) echo '&register_xedap_id='.$guixe_dap['register_services_id'];
+                                                        <form method="POST" target="_blank" enctype="application/x-www-form-urlencoded" action="xu_ly_thanh_toan.php?total_price=<?php //echo $total_dichvu;  
+                                                                                                                                                    //if(isset($contract['status']) && !$contract['status']) echo '&contract_id='.$contract['contract_id'];
+                                                                                                                                                    //if(isset($vesinh['status']) && !$vesinh['status']) echo '&register_vesinh_id='.$vesinh['register_services_id'];
+                                                                                                                                                    //if(isset($guixe_may['status']) && !$guixe_may['status']) echo '&register_xemay_id='.$guixe_may['register_services_id'];
+                                                                                                                                                    //if(isset($guixe_dap['status']) && !$guixe_dap['status']) echo '&register_xedap_id='.$guixe_dap['register_services_id'];
                                                                                                                                                     ?>">
                                                                                                                                                         <button type="submit" class="btn btn--primary" style="padding: 5px 10px;">Thanh toán toàn bộ</button>
                                                                                                                                                     </form><br>
-                                                        <!-- <button class="btn btn--primary" type="submit" >Thanh toán toàn bộ</button> -->
-                                                    </div>
+                                                    </div> -->
                                                 </div>
                                             <!-- </form> -->
                                         </div>

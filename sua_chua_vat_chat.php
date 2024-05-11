@@ -64,7 +64,7 @@ if($_SERVER['REQUEST_METHOD'] == 'POST'){
     }else{
         echo '<script type="text/javascript">
 
-                window.onload = function () { alert("Bạn cần đăng kí phòng và thanh toán tiền phòng!");}
+                window.onload = function () { alert("Bạn cần đăng ký thành công ở KTX trước"); window.location.href = "thong_tin_ca_nhan.php";}
                 
             </script>';
     }

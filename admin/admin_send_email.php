@@ -26,11 +26,62 @@ if(isset($_GET['feedback_id'])){
     <b>ktx_utc@utc.edu.vn</b></p>
     <p style="text-align: center;">Kí túc xá Đại học Giao thông Vận tải Hà nội</p>
     <p style="text-align: center;">Trung tâm hỗ trợ sinh viên - Phòng Công tác sinh viên</p>
-    <p style="text-align: center;">Điện thoại van phòng: 0292.9992773 - Điện thoại di động: 0977823399 (Zalo)</p>';
+    <p style="text-align: center;">Điện thoại văn phòng: 0292.9992773 - Điện thoại di động: 0977823399 (Zalo)</p>';
     $message = '<script type="text/javascript">
                     alert("Gửi thông báo thành công!");
                     window.onload = function () { 
                         window.location.href = "sua_chua_vat_chat.php";
+                    }
+                </script>';
+}
+// phản hồi về việc xác nhận đơn đăng ký ở của sinh viên
+if(isset($_GET['contract_id'])){
+    $contract_id = $_GET['contract_id'];
+    $sql_student = "SELECT * FROM student s
+                INNER JOIN contract c ON s.student_id = c.student_id
+                INNER JOIN room r ON c.room_id = r.room_id
+                INNER JOIN room_type rtype ON rtype.room_type_id = r.room_type_id
+                INNER JOIN semester sem ON sem.semester_id = c.semester_id
+                WHERE c.contract_id = '".$contract_id."' AND sem.status = true ";
+    $student = mysqli_query($conn, $sql_student)->fetch_assoc();
+    $student_email = $student['email'];
+    $subject = 'Thong bao xac nhan dang ky phong KTX';
+    $body = '<p>Chào em <b>'.$student['name'].'</b>. Tôi đã nhận được đơn đăng ký nội trú KTX phòng <b>'.$student['room_name'].'</b> của em. 
+    Đơn đăng ký của em hoàn toàn hợp lệ và được xác nhận đăng ký ở thành công. Để đi đến bước cuối cùng(vào ở), em hãy thanh toán tiền phòng trước hạn đăng ký.
+    Nếu hết thời gian đăng ký mà em chưa thanh toán tiền phòng, ban quản lý sẽ huỷ bỏ đơn đăng ký của em. Nếu em có bất kỳ thắc mắc nào hãy gửi đến
+    <b>ktx_utc@utc.edu.vn</b> hoặc đến trực tiếp ban quản lý KTX(P105 D1)</p>
+    <p style="text-align: center;">Kí túc xá Đại học Giao thông Vận tải Hà nội</p>
+    <p style="text-align: center;">Trung tâm hỗ trợ sinh viên - Phòng Công tác sinh viên</p>
+    <p style="text-align: center;">Điện thoại văn phòng: 0292.9992773 - Điện thoại di động: 0977823399 (Zalo)</p>';
+    $message = '<script type="text/javascript">
+                    alert("Xác nhận thành công. Đã gửi thông báo đến sinh viên!");
+                    window.onload = function () { 
+                        window.location.href = "ds_sinhvien_dangky_phong.php";
+                    }
+                </script>';
+}
+// phản hồi về việc huỷ đơn đăng ký ở của sinh viên
+if(isset($_GET['contract_error_id'])){
+    $contract_id = $_GET['contract_error_id'];
+    $sql_student = "SELECT * FROM student s
+                INNER JOIN contract c ON s.student_id = c.student_id
+                INNER JOIN room r ON c.room_id = r.room_id
+                INNER JOIN room_type rtype ON rtype.room_type_id = r.room_type_id
+                INNER JOIN semester sem ON sem.semester_id = c.semester_id
+                WHERE c.contract_id = '".$contract_id."' AND sem.status = true ";
+    $student = mysqli_query($conn, $sql_student)->fetch_assoc();
+    $student_email = $student['email'];
+    $subject = 'Thong bao xac nhan dang ky phong KTX';
+    $body = '<p>Chào em <b>'.$student['name'].'</b>. Tôi đã nhận được đơn đăng ký nội trú KTX phòng <b>'.$student['room_name'].'</b> của em. 
+    Đơn đăng ký của em không hợp lệ, KTX ưu tiên các bạn có hoàn cảnh khó khăn và thuộc khu vực vùng núi và đồng bằng. Nếu em có bất kỳ thắc mắc nào hãy gửi đến
+    <b>ktx_utc@utc.edu.vn</b> hoặc đến trực tiếp ban quản lý KTX(P105 D1)</p>
+    <p style="text-align: center;">Kí túc xá Đại học Giao thông Vận tải Hà nội</p>
+    <p style="text-align: center;">Trung tâm hỗ trợ sinh viên - Phòng Công tác sinh viên</p>
+    <p style="text-align: center;">Điện thoại văn phòng: 0292.9992773 - Điện thoại di động: 0977823399 (Zalo)</p>';
+    $message = '<script type="text/javascript">
+                    alert("Huỷ đơn thành công. Đã gửi thông báo đến sinh viên!");
+                    window.onload = function () { 
+                        window.location.href = "ds_sinhvien_dangky_phong.php";
                     }
                 </script>';
 }
