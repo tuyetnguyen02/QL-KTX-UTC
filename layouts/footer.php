@@ -69,15 +69,13 @@
         
     </footer>
 
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>
-    <script>
-        
-    </script>
+    <!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script> -->
+    
 
     <!-- Use Minified Plugins Version For Fast Page Load -->
-    <script src="js/plugins.js"></script>
+    <!-- <script src="js/plugins.js"></script>
     <script src="js/ajax-mail.js"></script>
-    <script src="js/custom.js"></script>
+    <script src="js/custom.js"></script> -->
 </body>
 
 </html>

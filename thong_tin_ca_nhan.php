@@ -236,18 +236,19 @@ $total_dichvu = 0;
                                                                     ?>
                                                                     <p class="col-3 text-warning" >Chưa thanh toán</p>
                                                                     <p class="col-3 text-warning" ><a href="xu_ly_thanh_toan.php?total_price=<?php echo $room_type['price'];?>&contract_id=<?php echo $contract['contract_id'];?>">Thanh toán</a></p>
-                                                                    <!-- <p class="col-1" style="color : red;"><a href="">Huỷ</a></p> -->
+                                                                    <p class="col-1" style="color : red;"><a href="action/huy_phong.php?contract_id=<?php echo $contract['contract_id'];?>">Huỷ</a></p>
                                                                     <?php
                                                                     break;
                                                                 case 2:
                                                                     ?>
                                                                     <p class="col-6 text-warning" >Đợi phê duyệt đơn đăng ký</p>
+                                                                    <p class="col-1" style="color : red;"><a href="action/huy_phong.php?contract_id=<?php echo $contract['contract_id'];?>">Huỷ</a></p>
                                                                     <?php
                                                                     break;
                                                                 case 3:
                                                                     ?>
                                                                     <p class="col-6 text-warning" >Đơn đăng ký không hợp lệ</p>
-                                                                    <p class="col-1" style="color : red;"><a href="">Huỷ</a></p>
+                                                                    <p class="col-1" style="color : red;"><a href="action/huy_phong.php?contract_id=<?php echo $contract['contract_id'];?>">Huỷ</a></p>
                                                                     <?php
                                                                     break;  
                                                                 default:
@@ -257,7 +258,9 @@ $total_dichvu = 0;
                                                                     break;
                                                             }
                                                             ?>
-                                                        <?php } ?>
+                                                        <?php } else{?>
+                                                            <p class="col-9 ">Chưa đăng kí dịch vụ</p>
+                                                            <?php }?>
                                                     </div>
                                                     <div class="col-12">
                                                         <p class="col-12" style="border-top: 1px dotted #000;"></p>
@@ -269,13 +272,13 @@ $total_dichvu = 0;
                                                             <p class="col-3 " >xe máy (<?php echo $guixe_may['motorbike_license_plate'];?>)</p>
                                                             <?php if($guixe_may['status'] == false){ $total_dichvu += $guixe_may['price'];?>
                                                             <p class="col-3 text-warning" ><a href="xu_ly_thanh_toan.php?total_price=<?php echo $guixe_may['price'];?>&register_xemay_id=<?php echo $guixe_may['register_services_id'];?>">Thanh toán</a></p>
-                                                            <p class="col-1" style="color : red;"><a href="">Huỷ</a></p><?php }else {?>
+                                                            <p class="col-1" style="color : red;"><a href="action/huy_dichvu.php?register_services_id=<?php echo $guixe_may['register_services_id'];?>">Huỷ</a></p><?php }else {?>
                                                                 <p class="col-4 text-success" >Đã thanh toán</p>
                                                                 <?php } } else{if($guixe_dap != NULL){?>
                                                             <p class="col-3 " >xe đạp</p>
                                                             <?php if($guixe_dap['status'] == false){ $total_dichvu += $guixe_dap['price'];?>
                                                                 <p class="col-3 text-warning" ><a href="xu_ly_thanh_toan.php?total_price=<?php echo $guixe_dap['price'];?>&register_xedap_id=<?php echo $guixe_dap['register_services_id'];?>">Thanh toán</a></p>
-                                                                <p class="col-1" style="color : red;"><a href="">Huỷ</a></p><?php }else {?>
+                                                                <p class="col-1" style="color : red;"><a href="action/huy_dichvu.php?register_services_id=<?php echo $guixe_dap['register_services_id'];?>">Huỷ</a></p><?php }else {?>
                                                                     <p class="col-4 text-success" >Đã thanh toán</p>
                                                             <?php } }else{?>
                                                                 <p class="col-9 " >Chưa đăng kí dịch vụ</p>
@@ -292,7 +295,7 @@ $total_dichvu = 0;
                                                         <?php if($vesinh != NULL) { if($vesinh['status'] == false){ $total_dichvu += $vesinh['price'];?>
                                                             <p class="col-3 text-warning" >Chưa thanh toán</p>
                                                             <p class="col-3 text-warning"><a href="xu_ly_thanh_toan.php?total_price=<?php echo $vesinh['price'];?>&register_vesinh_id=<?php echo $vesinh['register_services_id'];?>">Thanh toán</a></p>
-                                                            <p class="col-1" style="color : red;"><a href="">Huỷ</a></p><?php }else{?>
+                                                            <p class="col-1" style="color : red;"><a href="action/huy_dichvu.php?register_services_id=<?php echo $vesinh['register_services_id'];?>">Huỷ</a></p><?php }else{?>
                                                             <p class="col-9 text-success" >Đã thanh toán</p>
                                                             <?php } } else { ?>
                                                             <p class="col-9 " >Chưa đăng kí dịch vụ</p>

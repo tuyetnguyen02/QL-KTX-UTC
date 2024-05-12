@@ -84,25 +84,16 @@ if(isset($_GET['trang'])){
                 <div class="col-sm-3">
                   <div class="filter-group">
                     <label style="font-weight: bold"><i class="fa fa-bed"></i> Loại dãy</label>
-                    <div>
-                      <input
-                        type="checkbox"
-                        name="airConditioned"
-                        value="1"
-                        id="AirConditioned"
-                      /><label class="mx-4" for="airConditioned">Có máy lạnh</label>
-                    </div>
-                    <div>
-                      <input
-                        type="checkbox"
-                        name="cooked"
-                        value="1"
-                        id="cooked" 
-                      /><label class="mx-4" for="cooked">Cho phép nấu ăn</label>
-
-                      <?php //if(isset($_POST["cooked"])) { echo $_POST["cooked"]; } ?>
-                      
-                    </div>
+                    <div id="checkboxContainer">
+    <div>
+        <input type="checkbox" name="airConditioned" value="1" id="AirConditioned" />
+        <label class="mx-4" for="AirConditioned">Có máy lạnh</label>
+    </div>
+    <div>
+        <input type="checkbox" name="cooked" value="1" id="Cooked" />
+        <label class="mx-4" for="Cooked">Cho phép nấu ăn</label>
+    </div>
+</div>
                   </div>
                 </div>
                 <div class="col-sm-2">
@@ -111,10 +102,9 @@ if(isset($_GET['trang'])){
                       <i class="fa fa-user-friends"></i> Số lượng
                     </label>
                     <select
-                      class="form-control nice-select sort-select mr-0 select-filtera" id="select-filtera"
-                      name="quantity"
+                      class="form-control nice-select sort-select mr-0 select-filtera" id="loc_soluong"
                     >
-                      <option value="0">Tất cả</option>
+                      <option value="">Tất cả</option>
                       <option value="4">4 người/phòng</option> 
                       <option value="6">6 người/phòng</option> 
                       <option value="8">8 người/phòng</i></option> 
@@ -169,7 +159,7 @@ if(isset($_GET['trang'])){
                     
                 </div>
                 <div class="col-xl-4 col-lg-4 col-md-4 col-sm-6 mt--10 mt-md--0 ">
-                    <div class="sorting-selection">
+                    <!-- <div class="sorting-selection">
                         <span>Sắp xếp theo:</span>
                         <select class="form-control nice-select sort-select mr-0">
                             <option value="" >Mặc Định</option>
@@ -183,12 +173,12 @@ if(isset($_GET['trang'])){
                                 Theo giá: (Thấp &gt; Cao)</option>
                             
                         </select>
-                    </div>
+                    </div> -->
                 </div>
             </div>
         </div>
 
-        <div class="shop-product-wrap grid with-pagination row space-db--30 shop-border">
+        <div class="shop-product-wrap grid with-pagination row space-db--30 shop-border" id="ds_loaiphong">
 
 
             <?php while($row = $loaiphong->fetch_assoc()){ ?>
@@ -272,32 +262,78 @@ if(isset($_GET['trang'])){
     
 </main>
 
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 
 <script>
+  // sử dụng AJAX lọc loại phòng
   // $(document).ready(function(){
-  //   $('.airConditioned').change(function(){
-  //     var value = $(this).val();
-  //     alert(value);
-      
-   
-  //   })
+  //   $("#loc_soluong").on('input', function(event){
+  //       event.preventDefault();
+  //       console.log("Sự kiện input đã được bắt!");
+  //       var giatri = $(this).val();
+  //       // var loc_khoa = $("#loc_khoa").val();
+  //       // var loc_nganh = $("#loc_nganh").val();
+  //       $.ajax({
+  //           url: "ajax/loc_soluong.php",
+  //           type: "GET",
+  //           data: { giatri: giatri },//,loc_khoa:loc_khoa, loc_nganh: loc_nganh
+  //           success: function(data){
+  //               $("#ds_loaiphong").html(data);
+  //               // $("#timkiem").val("");
+  //           }
+  //       });
+  //       return false;
+  //   });
   // });
-  // $('.select-filtera').change(function(){
-  //     var value = $(this).find(':selected').value();
-  //     alert(value);
-  //   // if(value!=0){
-  //   //   car url = value;
-  //   //   window.location.replace(url);
-  //   // }
-  //   // else{
-  //   //   alert("Fales");
-  //   // }
-  //   //window.location.reload();
-   
-  // });
-  
-
+  $(document).ready(function(){
+    $("#loc_soluong").on('change', function(event){
+        event.preventDefault();
+        var giatri = $(this).val();
+        var airConditioned = $("#AirConditioned").prop("checked") ? 1 : 0;
+        var cooked = $("#Cooked").prop("checked") ? 1 : 0;
+        // Kiểm tra nếu giá trị là tất cả
+        if (giatri === "") {
+            // Thực hiện AJAX request để lấy toàn bộ danh sách loại phòng
+            $.ajax({
+                url: "ajax/loc_soluong.php",
+                type: "GET",
+                success: function(data){
+                    $("#ds_loaiphong").html(data);
+                }
+            });
+        } else {
+            // Nếu không, thực hiện AJAX request để lọc loại phòng theo số lượng
+            $.ajax({
+                url: "ajax/loc_soluong.php",
+                type: "GET",
+                data: { giatri: giatri, airConditioned: airConditioned, cooked: cooked },
+                success: function(data){
+                    $("#ds_loaiphong").html(data);
+                }
+            });
+        }
+    });
+  });
+  // lọc checkbox
+  $(document).ready(function(){
+    // Bắt sự kiện thay đổi của các checkbox
+    $("#checkboxContainer input[type='checkbox']").on('change', function(){
+        // Lấy giá trị của các checkbox
+        var airConditioned = $("#AirConditioned").prop("checked") ? 1 : 0;
+        var cooked = $("#Cooked").prop("checked") ? 1 : 0;
+        var giatri = $("#loc_soluong").val();
+        // Gửi yêu cầu AJAX với các giá trị checkbox
+        $.ajax({
+            url: "ajax/loc_checkbox.php",
+            type: "GET",
+            data: { airConditioned: airConditioned, cooked: cooked, giatri: giatri },
+            success: function(data){
+                // Cập nhật nội dung của phần tử hiển thị kết quả
+                $("#ds_loaiphong").html(data);
+            }
+        });
+    });
+  });
 </script>
 
 <?php require(__DIR__.'/layouts/footer.php'); ?>

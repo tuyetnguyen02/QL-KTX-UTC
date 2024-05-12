@@ -30,7 +30,7 @@
         // Nếu người dùng đã xác nhận xóa, thực hiện xóa dịch vụ
         if(isset($_GET['confirm']) && $_GET['confirm'] == 'yes') {
             $sql_insert = "INSERT INTO `contract`(`student_id`,`semester_id`,`room_id`, `total_price`,`status`)
-            VALUES ('".$student_id."','".$semester_id."','".$room_id."','".$price."', 0 )";
+            VALUES ('".$student_id."','".$semester_id."','".$room_id."','".$price."', 2 )";
             $booking = mysqli_query($conn, $sql_insert);
             
             if($booking) {
