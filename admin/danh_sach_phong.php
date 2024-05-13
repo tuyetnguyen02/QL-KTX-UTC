@@ -33,7 +33,7 @@ if(isset($_GET['trang'])){
     <div class="content-wrapper" >
         <div class="col-lg-12 grid-margin stretch-card" style="overflow: auto;">
             <!-- <div class="card"> -->
-                <div class="card-body">
+                <div class="card-body" id="ds_phong">
                     <div class="page-header">
                         <h3 class="page-title"> DANH SÁCH TOÀN BỘ PHÒNG </h3>
                     </div>
@@ -117,7 +117,24 @@ if(isset($_GET['trang'])){
             <!-- </div> -->
         </div>
     </div>
-    
-
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script>
+        // sử lý tìm kiếm với ajax
+        $(document).ready(function(){
+            $("#timkiem").on('input', function(event){
+                event.preventDefault();
+                var giatri = $(this).val();
+                $.ajax({
+                    url: "ajax/search_room.php",
+                    type: "GET",
+                    data: { giatri: giatri },
+                    success: function(data){
+                        $("#ds_phong").html(data);
+                    }
+                });
+                return false;
+            });
+        });
+    </script>
 
 <?php require(__DIR__.'/layouts/footer.php'); ?> 
