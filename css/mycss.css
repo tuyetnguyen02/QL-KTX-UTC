@@ -15,7 +15,7 @@ header-middle pt--10 pb--10{
 } */
 .mb--30-index {
     height: 700px;
-    background-image: url("../../image/background/background_login.png");
+    background-image: url("../image/background/background_login.png");
     background-size: cover;
 }
 
