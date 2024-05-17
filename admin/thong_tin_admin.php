@@ -81,38 +81,38 @@ if($_SERVER['REQUEST_METHOD'] == 'POST'){
                                 <div class="form-group row">
                                     <label for="exampleInputMobile" class="col-sm-3 col-form-label">Ngày sinh</label>
                                     <div class="col-sm-9">
-                                    <input type="text" class="form-control" id="exampleInputMobile" disabled value="<?php echo $admin['birthday']; ?>">
+                                    <input type="text" class="form-control" disabled value="<?php echo $admin['birthday']; ?>">
                                     </div>
                                 </div>
                                 <div class="form-group row">
                                     <label for="exampleInputMobile" class="col-sm-3 col-form-label">Giới tính</label>
                                     <div class="col-sm-9">
-                                    <input type="text" class="form-control" id="exampleInputMobile" disabled value="<?php if($admin['gender'] == 1) echo "Nữ";
+                                    <input type="text" class="form-control" disabled value="<?php if($admin['gender'] == 1) echo "Nữ";
                                                                                                                         else echo "Nam"; ?>">
                                     </div>
                                 </div>
                                 <div class="form-group row">
                                     <label for="exampleInputMobile" class="col-sm-3 col-form-label">Chức vụ</label>
                                     <div class="col-sm-9">
-                                    <input type="text" class="form-control" id="exampleInputMobile" required name="chucvu" value="<?php echo $admin['position']; ?>">
+                                    <input type="text" class="form-control" <?php if($admin['position'] != "Trưởng ban") echo "disabled";?> required name="chucvu" value="<?php echo $admin['position']; ?>">
                                     </div>
                                 </div>
                                 <div class="form-group row">
                                     <label for="exampleInputPassword2" class="col-sm-3 col-form-label">Email</label>
                                     <div class="col-sm-9">
-                                    <input type="text" class="form-control" id="exampleInputPassword2" required name="email" value="<?php echo $admin['email']; ?>">
+                                    <input type="text" class="form-control" required name="email" value="<?php echo $admin['email']; ?>">
                                     </div>
                                 </div>
                                 <div class="form-group row">
                                     <label for="exampleInputMobile" class="col-sm-3 col-form-label">Số điện thoại</label>
                                     <div class="col-sm-9">
-                                    <input type="text" class="form-control" id="exampleInputMobile" required name="dienthoai" value="<?php echo $admin['phone']; ?>">
+                                    <input type="text" class="form-control" required name="dienthoai" value="<?php echo $admin['phone']; ?>">
                                     </div>
                                 </div>
                                 <div class="form-group row">
                                     <label for="exampleInputMobile" class="col-sm-3 col-form-label">Địa chỉ</label>
                                     <div class="col-sm-9">
-                                    <input type="text" class="form-control" id="exampleInputMobile" required name="diachi" value="<?php echo $admin['address']; ?>">
+                                    <input type="text" class="form-control"  required name="diachi" value="<?php echo $admin['address']; ?>">
                                     <!-- <label style="" >*Nhập đủ xã/phường, huyện/quận, tỉnh/thành phố!</label> -->
                                     </div>
                                 </div>

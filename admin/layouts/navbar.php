@@ -32,7 +32,7 @@ $feedback = mysqli_query($conn, $sql_feedback);
       </form>
     </div>
     <ul class="navbar-nav navbar-nav-right">
-      <li class="nav-item  dropdown d-none d-md-block">
+      <!-- <li class="nav-item  dropdown d-none d-md-block">
         <a class="nav-link dropdown-toggle" id="reportDropdown" href="#" data-toggle="dropdown" aria-expanded="false"> Reports </a>
         <div class="dropdown-menu navbar-dropdown" aria-labelledby="reportDropdown">
           <a class="dropdown-item" href="#">
@@ -83,7 +83,7 @@ $feedback = mysqli_query($conn, $sql_feedback);
             </div>
           </a>
         </div>
-      </li>
+      </li> -->
       <li class="nav-item nav-profile dropdown">
         <a class="nav-link dropdown-toggle" id="profileDropdown" href="#" data-toggle="dropdown" aria-expanded="false">
           <div class="nav-profile-img">
@@ -98,18 +98,18 @@ $feedback = mysqli_query($conn, $sql_feedback);
             <img class="img-avatar img-avatar48 img-avatar-thumb" src="<?php echo $admin['image'];?>" alt="">
           </div>
           <div class="p-2">
-            <h5 class="dropdown-header text-uppercase pl-2 text-dark">User Options</h5>
-            <a class="dropdown-item py-1 d-flex align-items-center justify-content-between" href="#">
-              <span>Inbox</span>
+            <h5 class="dropdown-header text-uppercase pl-2 text-dark">Tuỳ chọn</h5>
+            <a class="dropdown-item py-1 d-flex align-items-center justify-content-between" href="ds_nhanvien.php">
+              <span>DS nhân viên</span>
               <span class="p-0">
-                <span class="badge badge-primary">3</span>
-                <i class="mdi mdi-email-open-outline ml-1"></i>
+                <!-- <span class="badge badge-primary">3</span> -->
+                <i class="mdi mdi-account-multiple-outline ml-1"></i>
               </span>
             </a>
             <a class="dropdown-item py-1 d-flex align-items-center justify-content-between" href="thong_tin_admin.php">
-              <span>Profile</span>
+              <span>Thông tin cá nhân</span>
               <span class="p-0">
-                <span class="badge badge-success">1</span>
+                <!-- <span class="badge badge-success">1</span> -->
                 <i class="mdi mdi-account-outline ml-1"></i>
               </span>
             </a>
@@ -118,19 +118,19 @@ $feedback = mysqli_query($conn, $sql_feedback);
               <i class="mdi mdi-settings"></i>
             </a>
             <div role="separator" class="dropdown-divider"></div>
-            <h5 class="dropdown-header text-uppercase  pl-2 text-dark mt-2">Actions</h5>
-            <a class="dropdown-item py-1 d-flex align-items-center justify-content-between" href="#">
+            <h5 class="dropdown-header text-uppercase  pl-2 text-dark mt-2">Hoạt động</h5>
+            <!-- <a class="dropdown-item py-1 d-flex align-items-center justify-content-between" href="#">
               <span>Lock Account</span>
               <i class="mdi mdi-lock ml-1"></i>
-            </a>
+            </a> -->
             <a class="dropdown-item py-1 d-flex align-items-center justify-content-between" href="dang_xuat.php">
-              <span>Log Out</span>
+              <span>Đăng xuất</span>
               <i class="mdi mdi-logout ml-1"></i>
             </a>
           </div>
         </div>
       </li>
-      <li class="nav-item dropdown">
+      <!-- <li class="nav-item dropdown">
         <a class="nav-link count-indicator dropdown-toggle" id="messageDropdown" href="#" data-toggle="dropdown" aria-expanded="false">
           <i class="mdi mdi-email-outline"></i>
           <span class="count-symbol bg-success"></span>
@@ -170,7 +170,7 @@ $feedback = mysqli_query($conn, $sql_feedback);
           <div class="dropdown-divider"></div>
           <h6 class="p-3 mb-0 text-center">4 new messages</h6>
         </div>
-      </li>
+      </li> -->
       <li class="nav-item dropdown">
         <a class="nav-link count-indicator dropdown-toggle" id="notificationDropdown" href="#" data-toggle="dropdown">
           <i class="mdi mdi-bell-outline"></i>
