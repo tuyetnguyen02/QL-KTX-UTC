@@ -56,17 +56,17 @@
     $sql_guixemay = "SELECT * FROM register_services WHERE semester_id = '".$semester['semester_id']."' AND student_id = '".$msv."'AND services_id = '".$services_guixemay['services_id']."'";
     $guixe_may = mysqli_query($conn, $sql_guixemay)->fetch_assoc();
     $check_xemay = ($guixe_may == NULL ? false : true);
-    echo $check_xemay;
+    // echo $check_xemay;
 
     $sql_guixedap = "SELECT * FROM register_services WHERE semester_id = '".$semester['semester_id']."' AND student_id = '".$msv."'AND services_id = '".$services_guixedap['services_id']."'";
     $guixe_dap = mysqli_query($conn, $sql_guixedap)->fetch_assoc();
     $check_xedap = ($guixe_dap == NULL ? false : true);
-    echo $check_xedap;
+    // echo $check_xedap;
 
     $sql_vesinh = "SELECT * FROM register_services WHERE semester_id = '".$semester['semester_id']."' AND student_id = '".$msv."'AND services_id = '".$services_vesinh['services_id']."'";
     $DV_vesinh = mysqli_query($conn, $sql_vesinh)->fetch_assoc();
     $check_vesinh = ($DV_vesinh == NULL ? false : true);
-    echo $check_vesinh;
+    // echo $check_vesinh;
 
 ?>
 <section class="breadcrumb-section">

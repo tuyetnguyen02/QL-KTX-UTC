@@ -39,8 +39,10 @@ function execPostRequest($url, $data)
             'Content-Type: application/json',
             'Content-Length: ' . strlen($data))
     );
-    curl_setopt($ch, CURLOPT_TIMEOUT, 5);
-    curl_setopt($ch, CURLOPT_CONNECTTIMEOUT, 5);
+
+    // 26-05 phát hiện lỗi time 5->20 lỗi do phía máy chủ momo
+    curl_setopt($ch, CURLOPT_TIMEOUT, 20);
+    curl_setopt($ch, CURLOPT_CONNECTTIMEOUT, 20);
     //execute post
     $result = curl_exec($ch);
     //close connection
@@ -59,6 +61,7 @@ $orderInfo = "Thanh toán qua ATM MoMo";
 $amount = $total_price;      //"10000";
 $orderId = time() ."";
 $redirectUrl = substr($url_update, 0, -1)."&price=".$total_price;
+// "https://localhost/Code_Tuyet/Dormitory/thong_tin_ca_nhan.php";
 $ipnUrl = substr($url_update, 0, -1)."&price=".$total_price;
 $extraData = "";
 

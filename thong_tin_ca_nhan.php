@@ -70,7 +70,7 @@ $vesinh = mysqli_query($conn, $sql_vesinh)->fetch_assoc();
 //fomat dateTame
 $currentDate = new DateTime(); 
 $currentDate->modify('-1 month'); // lấy ra tháng trước thời điểm hiện tại 04 -> 03
-echo $currentDate->format('m');
+// echo $currentDate->format('m');
 
 /////// kiểm tra nhap password và update password
 if($_SERVER['REQUEST_METHOD'] == 'POST'){
@@ -428,13 +428,13 @@ $total_dichvu = 0;
                         <div class="col-12  mb--20 aaaaa">
                             <p class="col-4 " >Nhập mật khẩu mới</p>
                             <p>:</p>
-                            <input class="col-6" id="current-pwd" placeholder="Mật khẩu mới.."
+                            <input class="col-6" placeholder="Mật khẩu mới.."
                                         type="password" name="matkhau1">
                         </div>
                         <div class="col-12  mb--20 aaaaa">
                             <p class="col-4 " >Nhập lại mật khẩu</p>
                             <p>:</p>
-                            <input class="col-6" id="current-pwd" placeholder="Nhập lại.."
+                            <input class="col-6" placeholder="Nhập lại.."
                                         type="password" name="matkhau2">
                         </div>
                         <div class="col-12 btn--seve">
@@ -469,12 +469,14 @@ $total_dichvu = 0;
         //         close.click();
         //     }
         // });
-        document.getElementById("submit_btn_guixe").addEventListener("click", function() {
-            document.getElementById("form_guixe").submit(); // Thay "yourFormId" bằng id của biểu mẫu của bạn
-        });
-        document.getElementById("submit_btn_dv").addEventListener("click", function() {
-            document.getElementById("form_dv").submit(); // Thay "yourFormId" bằng id của biểu mẫu của bạn
-        });
+
+        //26-05 phát hiện ra lỗi không sử dụng đến
+        // document.getElementById("submit_btn_guixe").addEventListener("click", function() {
+        //     document.getElementById("form_guixe").submit(); 
+        // });
+        // document.getElementById("submit_btn_dv").addEventListener("click", function() {
+        //     document.getElementById("form_dv").submit(); 
+        // });
     </script>
 
 <?php require(__DIR__.'/layouts/footer.php'); ?>
