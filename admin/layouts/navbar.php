@@ -27,7 +27,7 @@ $feedback = mysqli_query($conn, $sql_feedback);
           <div class="input-group-prepend bg-transparent">
             <i class="input-group-text border-0 mdi mdi-magnify"></i>
           </div>
-          <input type="text" id="timkiem" class="form-control bg-transparent border-0" placeholder="Search products">
+          <input type="text" id="timkiem" class="form-control bg-transparent border-0" placeholder="Nhập từ khoá">
         </div>
       </form>
     </div>
