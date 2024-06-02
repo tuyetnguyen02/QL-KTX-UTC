@@ -62,7 +62,8 @@ if(isset($_GET['pass'])){
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="css/login.css">
-    <title>Đăng Nhập - User Sinh viên</title>
+    <title>Đăng Nhập - Sinh viên</title>
+    <link rel="shortcut icon" href="image/logo/Logo-UTC.png" />
 </head>
 <body>
 <div class="container">

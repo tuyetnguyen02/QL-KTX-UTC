@@ -21,7 +21,8 @@ require('./database/query.php');
 <head>
     <meta charset="utf-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>Pustok - Cửa Hàng Bán Sách Trực Tuyến!</title>
+    <title>Kí túc xá UTC</title>
+    <link rel="shortcut icon" href="image/logo/Logo-UTC.png" />
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <!-- Use Minified Plugins Version For Fast Page Load -->
     <link rel="stylesheet" type="text/css" media="screen" href="css/plugins.css" />

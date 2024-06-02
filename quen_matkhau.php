@@ -89,7 +89,7 @@ if($_SERVER['REQUEST_METHOD'] == 'POST'){
 </head>
 <body>
 <div class="container">
-    <h2 class="login-title">Đăng Nhập</h2>
+    <h2 class="login-title">Quên mật khẩu</h2>
     
     <form class="login-form" method="POST">
       <div>
