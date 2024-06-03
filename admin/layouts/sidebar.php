@@ -31,7 +31,7 @@
         <ul class="nav flex-column sub-menu">
           <li class="nav-item"> <a class="nav-link" href="ds_sinhvien.php"> DS Sinh viên </a></li>
           <li class="nav-item"> <a class="nav-link" href="ds_sinhvien_dangky_phong.php"> DS SV đăng ký phòng</a></li>
-          <li class="nav-item"> <a class="nav-link" href="pages/samples/login.html"> DS SV chưa nộp tiền phòng</a></li>
+          <li class="nav-item"> <a class="nav-link" href="ds_sv_chua_nop_tien_phong.php"> DS SV chưa nộp tiền phòng</a></li>
         </ul>
       </div>
     </li>

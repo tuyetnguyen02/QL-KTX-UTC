@@ -14,11 +14,36 @@ header-middle pt--10 pb--10{
     background-image: url("../../image/background/background_login.png");
 } */
 .mb--30-index {
+    position: relative;
     height: 700px;
-    background-image: url("../image/background/background_login.png");
+    background-image: url("../image/background/bg.jpg");
+    /* filter: brightness(0.5); */
     background-size: cover;
+    color: white; /* Màu chữ trắng để tương phản với nền tối */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
 }
-
+.mb--30-index::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.5); /* Màu đen với độ mờ 50% */
+}
+.container {
+    position: relative;
+    z-index: 2; /* Đảm bảo nội dung nằm trên lớp phủ tối */
+}
+.container h1{
+    /* font-family: 'Arial', sans-serif; */
+    /* font-weight: 900;  */
+    font-weight: bold;
+    font-size: 60px;
+}
 /* thong_tin_ca_nhan css */
 .aaaaa{
     display: flex;

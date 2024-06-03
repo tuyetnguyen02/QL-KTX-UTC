@@ -16,33 +16,36 @@
                 </div>
                 <div class=" col-xl-3 col-lg-2 col-sm-6">
                     <div class="single-footer pb--40">
+                        <br>
                         <div class="footer-title">
-                            <h3>Thông Tin</h3>
+                            <h3>Tiện ích</h3>
                         </div>
                         <ul class="footer-list normal-list">
-                            <li><a href="">Giảm Giá</a></li>
-                            <li><a href="">Sản Phẩm Mới</a></li>
-                            <li><a href="">Siêu Giảm Giá</a></li>
-                            <li><a href="">Liên Hệ</a></li>
-                            <li><a href="">Sơ Đồ Trang</a></li>
+                            <li><a href="">Đội ngũ nhân viên</a></li>
+                            <li><a href="">Loại phòng</a></li>
+                            <li><a href="">Hoạt động Ktx</a></li>
+                            <li><a href="">Liên hệ</a></li>
+                            <li><a href="">Sơ đồ Ký túc xá</a></li>
                         </ul>
                     </div>
                 </div>
                 <div class=" col-xl-3 col-lg-2 col-sm-6">
                     <div class="single-footer pb--40">
+                        <br>
                         <div class="footer-title">
-                            <h3>Giải Đáp</h3>
+                            <h3>Truy cập nhanh</h3>
                         </div>
                         <ul class="footer-list normal-list">
-                            <li><a href="">Giao Hàng</a></li>
-                            <li><a href="">Về Chúng Tôi</a></li>
-                            <li><a href="">Cửa Hàng</a></li>
+                            <li><a href="">Chính sách và điều khoản</a></li>
+                            <li><a href="">Quy định thanh toán</a></li>
+                            <li><a href="">Dịch vụ Ktx</a></li>
                             <li><a href="">Liên Hệ</a></li>
                             <li><a href="">Sơ Đồ Trang</a></li>
                         </ul>
                     </div>
                 </div>
                 <div class=" col-xl-3 col-lg-4 col-sm-6">
+                    <br>
                     <div class="footer-title">
                         <h3>THÔNG BÁO</h3>
                     </div>

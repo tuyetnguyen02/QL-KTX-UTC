@@ -85,15 +85,15 @@ if(isset($_GET['trang'])){
                   <div class="filter-group">
                     <label style="font-weight: bold"><i class="fa fa-bed"></i> Loại dãy</label>
                     <div id="checkboxContainer">
-    <div>
-        <input type="checkbox" name="airConditioned" value="1" id="AirConditioned" />
-        <label class="mx-4" for="AirConditioned">Có máy lạnh</label>
-    </div>
-    <div>
-        <input type="checkbox" name="cooked" value="1" id="Cooked" />
-        <label class="mx-4" for="Cooked">Cho phép nấu ăn</label>
-    </div>
-</div>
+                        <div>
+                            <input type="checkbox" name="airConditioned" value="1" id="AirConditioned" />
+                            <label class="mx-4" for="AirConditioned">Có máy lạnh</label>
+                        </div>
+                        <div>
+                            <input type="checkbox" name="cooked" value="1" id="Cooked" />
+                            <label class="mx-4" for="Cooked">Cho phép nấu ăn</label>
+                        </div>
+                    </div>
                   </div>
                 </div>
                 <div class="col-sm-2">
