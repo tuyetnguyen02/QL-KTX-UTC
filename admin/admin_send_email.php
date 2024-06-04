@@ -85,7 +85,27 @@ if(isset($_GET['contract_error_id'])){
                     }
                 </script>';
 }
-
+// nhắc nhở sinh viên thanh toán tiền
+if(isset($_GET['student_id'])){
+    $student_id = $_GET['student_id'];
+    $text = $_GET['text'];
+    $sql_student = "SELECT * FROM student WHERE student_id = '".$student_id."'";
+    $student = mysqli_query($conn, $sql_student)->fetch_assoc();
+    // sử dụng các biến chuhng để gọi file này nhiều lần
+    $student_email = $student['email'];
+    $subject = 'Thong bao thanh toán tiền trước hạn';
+    $body = '<p>Chào em <b>'.$student['name'].'</b>. Hiện tại em chưa thanh toán <b>'.$text.'</b>. 
+    Em cần đóng trước khi hết hạn thanh toán onl!. Nếu không thanh toán đúng hạn, em cần lên ban quản lý để đóng tiền trược tiếp.
+    <p style="text-align: center;">Kí túc xá Đại học Giao thông Vận tải Hà nội</p>
+    <p style="text-align: center;">Trung tâm hỗ trợ sinh viên - Phòng Công tác sinh viên</p>
+    <p style="text-align: center;">Điện thoại văn phòng: 0292.9992773 - Điện thoại di động: 0977823399 (Zalo)</p>';
+    $message = '<script type="text/javascript">
+                    alert("Gửi thông báo thành công!");
+                    window.onload = function () { 
+                        window.location.href = "ds_sv_chua_nop_tien_phong.php";
+                    }
+                </script>';
+}
 //Create an instance; passing `true` enables exceptions
 $mail = new PHPMailer(true);
 
