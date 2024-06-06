@@ -81,7 +81,7 @@ if($_SERVER['REQUEST_METHOD'] == 'POST'){
                                 <div class="form-group row">
                                     <label for="exampleInputMobile" class="col-sm-3 col-form-label">Ngày sinh</label>
                                     <div class="col-sm-9">
-                                    <input type="text" class="form-control" disabled value="<?php echo $admin['birthday']; ?>">
+                                    <input type="text" class="form-control" disabled value="<?php echo date("d-m-Y", strtotime($admin['birthday'])); ?>">
                                     </div>
                                 </div>
                                 <div class="form-group row">

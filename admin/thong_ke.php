@@ -76,7 +76,7 @@ $sum_vesinh =  mysqli_query($conn, $sql_sum_vesinh)->fetch_assoc();
                                 <div class="card">
                                     <div class="card-body text-center">
                                         <h5 class="mb-2 text-dark font-weight-normal">Số lượng sinh viên đăng ký ở</h5>
-                                        <h2 class="mb-4 text-dark font-weight-bold">932.00</h2>
+                                        <h2 class="mb-4 text-dark font-weight-bold"><?php echo $sv_dadangky['total_students_registered'] . "/" . $maxquantity['total_capacity'];?></h2>
                                         <div id="sv_dangky">
                                             
                                         </div>
@@ -87,7 +87,7 @@ $sum_vesinh =  mysqli_query($conn, $sql_sum_vesinh)->fetch_assoc();
                                 <div class="card">
                                     <div class="card-body text-center">
                                         <h5 class="mb-2 text-dark font-weight-normal">Tỷ lệ SV sử dụng DV gửi xe máy</h5>
-                                        <h2 class="mb-4 text-dark font-weight-bold">756,00</h2>
+                                        <h2 class="mb-4 text-dark font-weight-bold"><?php echo $sum_xemay['xemay'] . "/" .$sv_dadangky['total_students_registered'];?></h2>
                                         <div id="dv_xemay">
                                                 
                                         </div>
@@ -98,7 +98,7 @@ $sum_vesinh =  mysqli_query($conn, $sql_sum_vesinh)->fetch_assoc();
                                 <div class="card">
                                     <div class="card-body text-center">
                                         <h5 class="mb-2 text-dark font-weight-normal">Tỷ lệ SV sử dụng DV gửi xe đạp</h5>
-                                        <h2 class="mb-4 text-dark font-weight-bold">100,38</h2>
+                                        <h2 class="mb-4 text-dark font-weight-bold"><?php echo $sum_xedap['xedap'] . "/" .$sv_dadangky['total_students_registered'];?></h2>
                                         <div id="dv_xedap">
                                                     
                                         </div>
@@ -109,7 +109,7 @@ $sum_vesinh =  mysqli_query($conn, $sql_sum_vesinh)->fetch_assoc();
                                 <div class="card">
                                     <div class="card-body text-center">
                                         <h5 class="mb-2 text-dark font-weight-normal">Tỷ lệ SV sử dụng DV dọn vệ sinh</h5>
-                                        <h2 class="mb-4 text-dark font-weight-bold">4250k</h2>
+                                        <h2 class="mb-4 text-dark font-weight-bold"><?php echo $sum_vesinh['vesinh'] . "/" .$sv_dadangky['total_students_registered'];?></h2>
                                         <div id="dv_vesinh">
                                                     
                                         </div>
@@ -179,11 +179,6 @@ $sum_vesinh =  mysqli_query($conn, $sql_sum_vesinh)->fetch_assoc();
             echo "['". $key['room_type_name'] ."', ". $key['number_room'] ."],";
           }
           ?>
-          // ['Work',     11],
-          // ['Eat',      2],
-          // ['Commute',  2],
-          // ['Watch TV', 2],
-          // ['Sleep',    7]
         ]);
 
         var options = {
@@ -192,22 +187,6 @@ $sum_vesinh =  mysqli_query($conn, $sql_sum_vesinh)->fetch_assoc();
             pieSliceText: 'label',
             pieHole: 0.4,
         };
-        // function drawChart() {
-        // var data = google.visualization.arrayToDataTable([
-        //   ['Task', 'Hours per Day'],
-        //   ['Work',     11],
-        //   ['Eat',      2],
-        //   ['Commute',  2],
-        //   ['Watch TV', 2],
-        //   ['A7',  1],
-        //   ['A5', 10],
-        //   ['Sleep',    7]
-        // ]);
-
-        // var options = {
-        //   // title: 'My Daily Activities',
-        //   pieHole: 0.4,
-        // };
 
         var chart = new google.visualization.PieChart(document.getElementById('donutchart'));
         chart.draw(data, options);
@@ -297,7 +276,7 @@ $sum_vesinh =  mysqli_query($conn, $sql_sum_vesinh)->fetch_assoc();
         chart.draw(data, options);
       }
     </script>
-    <script type="text/javascript">
+    <script type="text/javascript"> 
     google.charts.load("current", {packages:['corechart']});
     google.charts.setOnLoadCallback(drawChart);
     function drawChart() {
@@ -308,23 +287,18 @@ $sum_vesinh =  mysqli_query($conn, $sql_sum_vesinh)->fetch_assoc();
             echo "['". $key['room_type_name'] ."', ". $key['num_students_registered'] .",". $key['total_capacity'] .",''],";
           }
           ?>
-
-        // ['2010', 10, 24, 20, 32, 18, 5, ''],
-        // ['2020', 16, 22, 23, 30, 16, 9, ''],
-        // ['2030', 28, 19, 29, 30, 12, 13, '']
       ]);
 
       var view = new google.visualization.DataView(data);
 
-     var options = {
-        // width: 600,
-         height: 400,
-        legend: { position: 'top', maxLines: 3 },
-        bar: { groupWidth: '75%' },
-        isStacked: true,
-      };
-      var chart = new google.visualization.ColumnChart(document.getElementById("roomtype"));
-      chart.draw(view, options);
-    }
-    </script>
+      var options = {
+          height: 400,
+          legend: { position: 'top', maxLines: 3 },
+          bar: { groupWidth: '75%' },
+          isStacked: true,
+        };
+        var chart = new google.visualization.ColumnChart(document.getElementById("roomtype"));
+        chart.draw(view, options);
+      }
+      </script>
 <?php require(__DIR__.'/layouts/footer.php'); ?> 

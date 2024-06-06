@@ -56,7 +56,7 @@ $admin_login = mysqli_query($conn, $sql_admin_login)->fetch_assoc();
                                 <td><?php echo $i; $i++;?></td>
                                 <td><?php echo $row['number_admin'];?></td>
                                 <td><?php echo $row['admin_name'];?></td>
-                                <td><?php echo $row['birthday'];?></td>
+                                <td><?php echo date("d-m-Y", strtotime($row['birthday'])); ?></td>
                                 <td><?php echo $row['gender'] == "0" ? "Nam" : "Nữ"; ?></td>
                                 <td><?php echo $row['position'];?></td>
                                 <td><?php echo $row['phone']?></td>

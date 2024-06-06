@@ -42,10 +42,10 @@ $hocky = queryResult($conn,$sql_hocky);
                             <tr>
                                 <td><?php echo $row['semester'];?></td>
                                 <td><?php echo $row['school_year'];?></td>
-                                <td><?php echo $row['start_date'];?></td>
-                                <td><?php echo $row['end_date']?></td>
-                                <td><?php echo $row['registration_startdate'];?></td>
-                                <td><?php echo $row['registration_enddate']?></td>
+                                <td><?php echo date("d-m-Y", strtotime($row['start_date'])); ?></td>
+                                <td><?php echo date("d-m-Y", strtotime($row['end_date'])); ?></td>
+                                <td><?php echo date("d-m-Y", strtotime($row['registration_startdate'])); ?></td>
+                                <td><?php echo date("d-m-Y", strtotime($row['registration_enddate'])); ?></td>
                                 <td style="color : <?php if($row['status']) echo "green"; else echo "red";?>"><?php if($row['status']) echo "Đang hoạt động"; else echo "Không hoạt động";?></span></td>
                                 <td><li class="breadcrumb-item"><a href="">Sửa</a></li></td>
                                 <td><li class="breadcrumb-item"><a href="action/hoc_ky/delete_semester.php?semester_id=<?php echo $row['semester_id'];?>">Xoá</a></li></td>

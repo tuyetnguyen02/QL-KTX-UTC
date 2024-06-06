@@ -51,7 +51,7 @@ if(isset($_GET['register_xedap_id'])){
 // Thanh toán bill điện nước là riêng biệt
 if(isset($_GET['bill_id'])){
     $bill_id = $_GET['bill_id'];
-    $sql_update_bill = "UPDATE bill SET status = true, student_id = '".$sv['student_id']."' WHERE bill_id =  '".$bill_id."'";
+    $sql_update_bill = "UPDATE bill SET status_bill = 1, student_id = '".$sv['student_id']."' WHERE bill_id =  '".$bill_id."'";
     $update_bill = queryExecute($conn, $sql_update_bill);
     $checkout = isset($update_bill) ? true : false;
 

@@ -38,7 +38,7 @@
 
         $total_price = ($final_electricity - $initial_electricity) * $price_dien + ($final_water - $initial_water) * $price_nuoc;
         // echo $total_price;
-        $sql_insert = "INSERT INTO `bill`(`admin_id1`,`room_id`,`created_date`,`initial_electricity`,`final_electricity`,`initial_water`,`final_water`,`price`,`status`)
+        $sql_insert = "INSERT INTO `bill`(`admin_id1`,`room_id`,`created_date`,`initial_electricity`,`final_electricity`,`initial_water`,`final_water`,`price`,`status_bill`)
                             VALUES ('".$admin_id."','".$room_id."','".$current_time."','".$initial_electricity."','".$final_electricity."','".$initial_water."','".$final_water."','".$total_price."', 0)";
         $insert = queryExecute($conn, $sql_insert);
         if(isset($insert)){

@@ -46,7 +46,7 @@ $major = mysqli_query($conn, $sql_major);
                                 <td><?php echo $i; $i++;?></td>
                                 <td><?php echo $row['number_student'];?></td>
                                 <td><?php echo $row['name'];?></td>
-                                <td><?php echo $row['birthday'];?></td>
+                                <td><?php echo date("d-m-Y", strtotime($row['birthday'])); ?></td>
                                 <td><?php echo $row['room_name']; echo '('; echo $row['room_type_name'].')';?></td>
                                 <td><?php echo $row['major']; echo '('; echo $row['classroom'].')';?></td>
                                 <td><?php echo $row['phone']?></td>

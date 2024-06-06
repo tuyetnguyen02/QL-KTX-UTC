@@ -155,7 +155,7 @@ if($_SERVER['REQUEST_METHOD'] == 'POST'){
                                         <tr>    
                                             <td><?php echo $i; $i++;?></td>
                                             <td><?php echo $row['material_name'];?></td>
-                                            <td><?php echo $row['send_date'];?></td>
+                                            <td><?php echo date("d-m-Y", strtotime($row['send_date'])); ?></td>
                                             <td><?php echo $row['name']; ?></td>
                                             <?php if($row['status']){?>
                                                 <td class="text-success">Đã các nhận</td><?php }else{?>

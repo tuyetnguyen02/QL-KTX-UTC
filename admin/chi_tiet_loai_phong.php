@@ -122,6 +122,15 @@
                                     </thead>
                                     <tbody>
                                         <?php while($row = $room->fetch_assoc()){ ?>
+                                            <?php //updata số lượng sinh viên hiện tại trong 1 phòng
+                                            $sql_soluong = "SELECT COUNT(*) AS contract_count FROM contract c
+                                            INNER JOIN semester sem ON sem.semester_id = c.semester_id
+                                            WHERE room_id = '".$row['room_id']."' AND sem.status = true";
+                                            $soluong = mysqli_query($conn, $sql_soluong)->fetch_assoc();
+                                            //echo $soluong['contract_count'];
+
+                                            $sql_update = "UPDATE `room` SET `current_quantity` = '".$soluong['contract_count']."' WHERE `room_id` = '".$row['room_id']."'";
+                                            queryExecute($conn, $sql_update);?>
                                         <tr>
                                             <td><?php echo $i; $i++;?></td>
                                             <td><?php echo $row['room_name'];?></td>

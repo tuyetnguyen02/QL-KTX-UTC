@@ -33,7 +33,7 @@ $loaiphong = queryResult($conn,$sql_loaiphong);
         Home Features Section
         ===================================== -->
         <section class="section-margin mb--30-index">
-            <div class="container">
+            <div class="container container_index">
                 <h1>Chúng tôi là gia đình,</h1>
                 <h1>không chỉ là nơi ở.</h1>
                 <h5>Tạo kỉ niệm tại kí túc xá - Nơi bạn gọi là nhà</h5>

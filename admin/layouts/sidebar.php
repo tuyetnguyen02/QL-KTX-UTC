@@ -3,7 +3,7 @@
     <li class="nav-item nav-category">HỆ THỐNG KÍ TÚC XÁ</li>
     <li class="nav-item">
       <a class="nav-link" href="thong_ke.php">
-        <span class="icon-bg"><i class="mdi mdi-cube menu-icon"></i></span>
+        <span class="icon-bg"><i class="mdi mdi-chart-bar menu-icon"></i></span>
         <span class="menu-title">Thống kê</span>
       </a>
     </li>
@@ -23,7 +23,7 @@
     </li>
     <li class="nav-item">
       <a class="nav-link" data-toggle="collapse" href="#auth" aria-expanded="false" aria-controls="auth">
-        <span class="icon-bg"><i class="mdi mdi-lock menu-icon"></i></span>
+        <span class="icon-bg"><i class="mdi mdi-account-multiple menu-icon"></i></span>
         <span class="menu-title">Quản lý Sinh viên</span>
         <i class="menu-arrow"></i>
       </a>
@@ -37,7 +37,7 @@
     </li>
     <li class="nav-item">
       <a class="nav-link" href="dich_vu.php">
-        <span class="icon-bg"><i class="mdi mdi-contacts menu-icon"></i></span>
+        <span class="icon-bg"><i class="mdi mdi-clipboard-text menu-icon"></i></span>
         <span class="menu-title">Quản lý Dịch vụ</span>
       </a>
     </li>
@@ -49,7 +49,7 @@
     </li>
     <li class="nav-item">
       <a class="nav-link" href="hoc_ky.php">
-        <span class="icon-bg"><i class="mdi mdi-chart-bar menu-icon"></i></span>
+        <span class="icon-bg"><i class="mdi mdi-cube menu-icon"></i></span>
         <span class="menu-title">Quản lý học kì</span>
       </a>
     </li>

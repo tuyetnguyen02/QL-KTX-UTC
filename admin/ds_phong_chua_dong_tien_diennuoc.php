@@ -59,7 +59,7 @@ if(isset($_GET['trang'])){
                                             <?php //$roomtype = $row['room_type_id']; 
                                                 $sql_room = "SELECT * FROM room r
                                                             INNER JOIN bill b ON r.room_id = b.room_id
-                                                            WHERE r.room_type_id = '".$row['room_type_id']."' AND b.status = false"; 
+                                                            WHERE r.room_type_id = '".$row['room_type_id']."' AND b.status_bill = false"; 
                                                 $room = queryResult($conn, $sql_room);
                                                 if($room){
                                                 while($row_room = $room->fetch_assoc()){ ?>
@@ -69,7 +69,7 @@ if(isset($_GET['trang'])){
 
                                                 <td><?php echo $row_room['price'];?></td>
 
-                                                <td><?php echo $row_room['status'] == false ?  "Chưa thanh toán" : "Đã thanh toán" ; ?></td>
+                                                <td><?php echo $row_room['status_bill'] == false ?  "Chưa thanh toán" : "Đã thanh toán" ; ?></td>
                                                 <td>Nhắc nhở</td>
                                                 <td><li class="breadcrumb-item"><a href="">Nộp tiền mặt</a></li></td>
                                             </tr>

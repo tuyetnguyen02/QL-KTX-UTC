@@ -70,22 +70,30 @@
                         ORDER BY created_date DESC
                         LIMIT 1;";
     $bill_before = mysqli_query($conn, $sql_bill_before);
-    $check_addbill = false;
-    if($bill_before !== false && $bill_before !== null) { // Kiểm tra xem $bill_before không phải là false hoặc null
+   
+    $check_addbill = true;
+    if ($bill_before !== false && $bill_before !== null) { // Kiểm tra xem $bill_before không phải là false hoặc null
         $bill_before = $bill_before->fetch_assoc();
-        if($bill_before !== null) { // Kiểm tra xem $bill_before không phải là null
+        if ($bill_before !== null) { // Kiểm tra xem $bill_before không phải là null
             $initial_electricity = $bill_before['final_electricity'];
             $initial_water = $bill_before['final_water'];
-
+            
             $bill_before_date = new DateTime($bill_before['created_date']); 
-            $bill_before_date->format('m');
+            $bill_before_month = $bill_before_date->format('m');
+            $bill_before_year = $bill_before_date->format('Y');
 
             $currentDate = new DateTime(); 
-            $currentDate->modify('-1 month');
-            $currentDate->format('m');
+            // $currentDate->modify('-1 month');  Database lưu dữ liệu tại thời điểm tạo
+            $current_month = $currentDate->format('m');
+            $current_year = $currentDate->format('Y');
 
-            if($bill_before_date != $currentDate) $check_addbill = true;
-
+            if ($bill_before_month == $current_month && $bill_before_year == $current_year) {
+                $check_addbill = false;
+            } else {
+                $check_addbill = true;
+            }
+            // check điều kiện đã có bill tháng trước hay chưa
+            // echo $check_addbill . ' ' . $bill_before_date->format('Y-m-d') . ' ' . $currentDate->format('Y-m-d');
         } else {
             $initial_electricity = 0;
             $initial_water = 0;
@@ -95,7 +103,6 @@
         $initial_electricity = 0;
         $initial_water = 0;
     }
-    
 ?>
 <div class="main-panel"><!--style="padding : 20px 10px; box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);" -->
     <div class="content-wrapper" >
@@ -205,10 +212,11 @@
                                     <div class="page-header">
                                         <h3 class="page-title"> Cập nhật tiền điện nước </h3> 
                                         <nav aria-label="breadcrumb">
-                                            <?php //if($check_addbill == false){?>
-                                                <button class="btn btn-link btn-rounded btn-fw" id="addroom-btn-open" style="font-size: 16px;"><?php if($check_addbill == false){ echo '<i class="mdi mdi-plus-circle-outline" style="font-size: 16px;"></i>Thêm hoá đơn điện nước';}?></button>
-                                                <?php //}?>
-                                            
+                                            <button class="btn btn-link btn-rounded btn-fw" id="addroom-btn-open" style="font-size: 16px;">
+                                                <?php if($check_addbill == true) {
+                                                    echo '<i class="mdi mdi-plus-circle-outline" style="font-size: 16px;"></i> Thêm hoá đơn điện nước';
+                                                }?>
+                                            </button>
                                         </nav>
                                     </div>
                                     <?php 
@@ -246,11 +254,11 @@
                                                 <td><?php $sql_admin1 = "SELECT admin_name FROM admin WHERE admin_id = '".$row['admin_id1']."'";
                                                             $admin1 = mysqli_query($conn, $sql_admin1)->fetch_assoc();
                                                             echo $admin1['admin_name'] ; ?></td>
-                                                <td><?php echo $row['created_date'];?></td>
+                                                <td><?php echo date("d-m-Y", strtotime($row['created_date'])); ?></td>
                                                 <td><?php $sql_admin2 = "SELECT admin_name FROM admin WHERE admin_id = '".$row['admin_id2']."'";
                                                             $admin2 = mysqli_query($conn, $sql_admin2)->fetch_assoc();
                                                             if(isset($admin2)) echo $admin2['admin_name'] ; ?></td>
-                                                <?php if($row['status']){?>
+                                                <?php if($row['status_bill']){?>
                                                     <td class="text-success">Đã thanh toán</td>
                                                     <td></td><?php }else{?>
                                                         <td class="text-danger">Chưa thanh toán</td>

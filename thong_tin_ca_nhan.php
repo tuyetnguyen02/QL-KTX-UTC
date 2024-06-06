@@ -133,57 +133,57 @@ $total_dichvu = 0;
                                                     <div class="col-12  mb--20 aaaaa">
                                                         <p class="col-3 " >Họ và tên</p>
                                                         <p>:</p>
-                                                        <input class="col-8" id="display-name" placeholder="Họ tên.."
+                                                        <input class="col-8"  placeholder="Họ tên.."
                                                             type="text" required name="tensinhvien" disabled value="<?php echo $sv['name']; ?>">
                                                     </div>
                                                     <div class="col-12  mb--20 aaaaa">
                                                         <p class="col-3 " >Mã sinh viên</p>
                                                         <p>:</p>
-                                                        <input class="col-8" id="display-name" placeholder="Mã sinh viên.."
+                                                        <input class="col-8"  placeholder="Mã sinh viên.."
                                                             type="text" required name="masinhvien" disabled value="<?php echo $sv['number_student']; ?>">
                                                     </div>
                                                     <div class="col-12  mb--20 aaaaa">
                                                         <p class="col-3 " >Ngày sinh</p>
                                                         <p>:</p>
-                                                        <input class="col-8" id="display-name" placeholder="Ngày sinh.."
-                                                            type="text" required name="ngaysinh" disabled value="<?php echo $sv['birthday']; ?>">
+                                                        <input class="col-8"  placeholder="Ngày sinh.."
+                                                            type="text" required name="ngaysinh" disabled value="<?php echo date("d-m-Y", strtotime($sv['birthday'])); ?>">
                                                     </div>
                                                     <div class="col-12  mb--20 aaaaa">
                                                         <p class="col-3 " >Giới tính</p>
                                                         <p>:</p>
-                                                        <input class="col-8" id="display-name" placeholder="Giới tính.."
+                                                        <input class="col-8"  placeholder="Giới tính.."
                                                             type="text" required name="gioitinh" disabled value="<?php if($sv['gender'] == 1) echo "Nữ";
                                                                                                                         else echo "Nam"; ?>">
                                                     </div>
                                                     <div class="col-12  mb--20 aaaaa">
                                                         <p class="col-3 " >Email</p>
                                                         <p>:</p>
-                                                        <input class="col-8" id="display-name" placeholder="Email.."
+                                                        <input class="col-8"  placeholder="Email.."
                                                             type="text" required name="email" disabled value="<?php echo $sv['email']; ?>">
                                                     </div>
                                                     
                                                     <div class="col-12  mb--20 aaaaa">
                                                         <p class="col-3 " >Chuyên ngành</p>
                                                         <p>:</p>
-                                                        <input class="col-8" id="display-name" placeholder="Chuyên ngành.."
+                                                        <input class="col-8"  placeholder="Chuyên ngành.."
                                                             type="text" required name="chuyennganh" value="<?php echo $sv['major']; ?>">
                                                     </div>
                                                     <div class="col-12  mb--20 aaaaa">
                                                         <p class="col-3 " >Lớp</p>
                                                         <p>:</p>
-                                                        <input class="col-8" id="display-name" placeholder="Lớp.."
+                                                        <input class="col-8"  placeholder="Lớp.."
                                                             type="text" required name="lop" disabled value="<?php echo $sv['classroom']; ?>">
                                                     </div>
                                                     <div class="col-12  mb--20 aaaaa">
                                                         <p class="col-3 " >Số điện thoại</p>
                                                         <p>:</p>
-                                                        <input class="col-8" id="display-name" placeholder="Số điện thoại.."
+                                                        <input class="col-8"  placeholder="Số điện thoại.."
                                                             type="text" required name="sodienthoai" disabled value="<?php echo $sv['phone']; ?>">
                                                     </div>
                                                     <div class="col-12  mb--20 aaaaa">
                                                         <p class="col-3 " >Hộ khẩu</p>
                                                         <p>:</p>
-                                                        <input class="col-8" id="display-name" placeholder="Hộ khẩu.."
+                                                        <input class="col-8"  placeholder="Hộ khẩu.."
                                                             type="text" required name="hokhau" disabled value="<?php echo $sv['address']; ?>">
                                                     </div>
                                                 </div>
@@ -218,7 +218,7 @@ $total_dichvu = 0;
                                                     <div class="col-12  mb--20 aaaaa">
                                                         <p class="col-2 " >Thời gian ở</p>
                                                         <p>:</p>
-                                                        <span class="col-8 " ><?php echo $semester['start_date']; ?> đến <?php echo $semester['end_date']; ?></span>
+                                                        <span class="col-8 " ><?php echo date("d-m-Y", strtotime($semester['start_date'])); ?> đến <?php echo date("d-m-Y", strtotime($semester['end_date'])); ?></span>
                                                         <!-- <p class="col-1">đến</p>
                                                         <p class="col-2 " ></p> -->
                                                     </div>
@@ -377,7 +377,7 @@ $total_dichvu = 0;
                         <th>Thanh toán</th>
                     </tr>
                     </thead>
-                    <?php if($contract == 1){?>
+                    <?php if($contract['status'] == 1){?>
                     <tbody>
                         <?php if(isset($bill)){
                             while($row = $bill->fetch_assoc()){?>
@@ -391,11 +391,13 @@ $total_dichvu = 0;
                                 <td><?php echo $row['final_water'];?></td>
                                 <td><?php echo $row['price'];?> (VNĐ)</td>
                                 <td><?php echo $row['created_date'];?></td>
-                                <?php if($row['status']){?>
+                                <?php if($row['status_bill']){?>
                                     <td class="text-success">Đã thanh toán</td>
-                                    <td></td><?php }else{?>
+                                    <td></td>
+                                    <?php }else{?>
                                         <td class="text-warning">Chưa thanh toán</td>
-                                        <td><a href="xu_ly_thanh_toan.php?total_price=<?php echo $row['price'];?>&bill_id=<?php echo $row['bill_id'];?>" class="text-warning">Thanh toán</a></td><?php }?>
+                                        <td><a href="xu_ly_thanh_toan.php?total_price=<?php echo $row['price'];?>&bill_id=<?php echo $row['bill_id'];?>" class="text-warning">Thanh toán</a></td>
+                                    <?php }?>
                             </tr>
                         <?php } } ?>
                     </tbody>
@@ -423,7 +425,7 @@ $total_dichvu = 0;
                         <div class="col-12  mb--20 aaaaa">
                             <p class="col-4 " >Mật khẩu hiện tại</p>
                             <p>:</p>
-                            <input class="col-6" id="display-name" placeholder="Mật khẩu hiện tại.."
+                            <input class="col-6"  placeholder="Mật khẩu hiện tại.."
                                 type="text" required name="matkhau" disabled value="<?php echo $sv['password']; ?>">
                         </div>
                         <div class="col-12  mb--20 aaaaa">
