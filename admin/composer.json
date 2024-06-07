@@ -1,0 +1,22 @@
+{
+    "name": "vendor/package",
+    "description": "A short description of what your package does",
+    "type": "library",
+    "require": {
+        "php": ">=7.2.0",
+        "phpoffice/phpspreadsheet": "^2.1"
+    },
+    "license": "MIT",
+    "autoload": {
+        "psr-4": {
+            "Vendor\\Package\\": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "tuyetnguyen02",
+            "email": "tuyetpksl@gmail.com"
+        }
+    ],
+    "minimum-stability": "stable"
+}
