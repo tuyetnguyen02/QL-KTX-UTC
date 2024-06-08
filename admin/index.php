@@ -34,7 +34,9 @@ if(isset($_GET['trang'])){
 	$loaiphong = queryResult($conn,$sql_loaiphong);
 }
 
-
+if(isset($_POST['btn_Export'])){
+    echo '<script>window.location.href = "action/xuat_excel/xuat_excel_loaiphong.php";</script>';
+}
 ?>
 
  <div class="main-panel"><!--style="padding : 20px 10px; box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);" -->
@@ -46,11 +48,23 @@ if(isset($_GET['trang'])){
                         <h3 class="page-title"> QUẢN LÝ LOẠI PHÒNG </h3>
                         <nav aria-label="breadcrumb">
                             <ol class="breadcrumb">
-                                <li><nav aria-label="breadcrumb">
-                                        <button class="btn btn-link btn-rounded btn-fw" id="addroom-btn-open" style="font-size: 16px;"><i class="mdi mdi-plus-circle-outline" style="font-size: 16px;"></i>Thêm loại phòng</button>
-                                    </nav></li>
+                                <li >
+                                    <button class="btn btn-link btn-rounded btn-fw" id="addroom-btn-open" style="font-size: 16px;"><i class="mdi mdi-plus-circle-outline" style="font-size: 16px;"></i> Thêm loại phòng</button>
+                                </li>
+                                <li >
+                                    <button class="btn btn-link" style="font-size: 16px;">||</button> 
+                                </li>
+                                <li ><form method="POST">
+                                    <button name="btn_Export" type="Submit" class="btn btn-link btn-rounded btn-fw" style="font-size: 16px;"><i class="mdi mdi-cloud-print-outline" style="font-size: 16px;"></i> In danh sách</button> 
+                                </form></li>
                             </ol>
                         </nav>
+                        <!-- <nav aria-label="breadcrumb">
+                            <ol class="breadcrumb">
+                                <li class="breadcrumb-item"><a href="#">Charts</a></li>
+                                <li class="breadcrumb-item active" aria-current="page">Chart-js</li>
+                            </ol>
+                        </nav> -->
                     </div>
                     <!-- <h4 class="card-title">QUẢN LÝ LOẠI PHÒNG</h4>
                     <li class="breadcrumb-item"><a href="#">Thêm loại phòng</a></li> -->

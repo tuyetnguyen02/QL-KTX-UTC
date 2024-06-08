@@ -11,7 +11,7 @@ use PhpOffice\PhpSpreadsheet\Spreadsheet;
 use PhpOffice\PhpSpreadsheet\Writer\Xlsx;
 
 if(isset($_POST['btn_Export'])){
-    echo '<script>window.location.href = "xuat_excel.php";</script>';
+    echo '<script>window.location.href = "action/xuat_excel/xuat_excel_hoadon.php";</script>';
 }
 ?>
 

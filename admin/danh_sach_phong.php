@@ -25,7 +25,9 @@ if(isset($_GET['trang'])){
 	$loaiphong = queryResult($conn,$sql_loaiphong);
 }
 
-    //$roomtype = "";
+if(isset($_POST['btn_Export'])){
+    echo '<script>window.location.href = "action/xuat_excel/xuat_excel_phong.php";</script>';
+}
     
 ?>
 
@@ -36,6 +38,17 @@ if(isset($_GET['trang'])){
                 <div class="card-body" id="ds_phong">
                     <div class="page-header">
                         <h3 class="page-title"> DANH SÁCH TOÀN BỘ PHÒNG </h3>
+                        <nav aria-label="breadcrumb">
+                            <ol class="breadcrumb">
+                                <form method="POST">
+                                    <button class="btn btn-link btn-rounded btn-fw" 
+                                            name="btn_Export" type="Submit" style="font-size: 16px;">
+                                            In danh sách
+                                    </button>    
+                                </form>
+                                
+                            </ol>
+                        </nav>
                     </div>
                     <?php while($row = $loaiphong->fetch_assoc()){ ?>
                     <div class="row">

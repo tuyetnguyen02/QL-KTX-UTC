@@ -1,11 +1,12 @@
 <?php
 error_reporting(E_ALL);
 ini_set('display_errors', 1);
-require 'vendor/autoload.php';
-require('../database/connect.php');    
-require('../database/query.php');
+require '../../vendor/autoload.php';
+require('../../../database/connect.php');	
+require('../../../database/query.php');
 use PhpOffice\PhpSpreadsheet\Spreadsheet;
 use PhpOffice\PhpSpreadsheet\Writer\Xlsx;
+use PhpOffice\PhpSpreadsheet\Style\Alignment;
 
 $spreadsheet = new Spreadsheet();
 $sheet = $spreadsheet->getActiveSheet();
@@ -35,17 +36,27 @@ if ($hoadon->num_rows > 0) {
     while ($row = $hoadon->fetch_assoc()) {
         $sheet->setCellValue('A' . $rowNumber, $stt++);
         $sheet->setCellValue('B' . $rowNumber, $row['payment_id']);
-        $sheet->setCellValue('C' . $rowNumber, $row['student_id']);
+        $sheet->setCellValue('C' . $rowNumber, $row['number_student']);
         $sheet->setCellValue('D' . $rowNumber, $row['name']);
-        $sheet->setCellValue('E' . $rowNumber, $row['contract_id']);
-        $sheet->setCellValue('F' . $rowNumber, $row['register_services_id']);
-        $sheet->setCellValue('G' . $rowNumber, $row['bill_id']);
+        $sheet->setCellValue('E' . $rowNumber, $row['contract_id'] != null ? 'X' : '');
+        $sheet->setCellValue('F' . $rowNumber, $row['register_services_id'] != null ? 'X' : '');
+        $sheet->setCellValue('G' . $rowNumber, $row['bill_id'] != null ? 'X' : '');
         $sheet->setCellValue('H' . $rowNumber, $row['datetime']);
         $sheet->setCellValue('I' . $rowNumber, $row['method']);
         $sheet->setCellValue('J' . $rowNumber, $row['total_price']);
         $rowNumber++;
     }
 }
+$sheet->getColumnDimension('A')->setAutoSize(true);
+$sheet->getColumnDimension('B')->setAutoSize(true);
+$sheet->getColumnDimension('C')->setAutoSize(true);
+$sheet->getColumnDimension('D')->setAutoSize(true);
+$sheet->getColumnDimension('E')->setAutoSize(true);
+$sheet->getColumnDimension('F')->setAutoSize(true);
+$sheet->getColumnDimension('G')->setAutoSize(true);
+$sheet->getColumnDimension('H')->setAutoSize(true);
+$sheet->getColumnDimension('I')->setAutoSize(true);
+$sheet->getColumnDimension('J')->setAutoSize(true);
 
 $writer = new Xlsx($spreadsheet);
 
@@ -61,13 +72,4 @@ readfile($tempFile);
 // Xóa file tạm sau khi gửi xong
 unlink($tempFile);
 
-// Chuyển hướng về trang hoa_don.php
-echo '<script type="text/javascript">
-
-                window.onload = function () { 
-                    alert("Tên loại phòng đã tồn tại!");
-                    window.location.href = "hoa_don.php";
-                }
-
-            </script>';
 ?>
