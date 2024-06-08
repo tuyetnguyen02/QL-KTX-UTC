@@ -93,7 +93,7 @@ if(isset($_GET['student_id'])){
     $student = mysqli_query($conn, $sql_student)->fetch_assoc();
     // sử dụng các biến chuhng để gọi file này nhiều lần
     $student_email = $student['email'];
-    $subject = 'Thong bao thanh toán tiền trước hạn';
+    $subject = 'Thong bao thanh toan tien phong truoc han';
     $body = '<p>Chào em <b>'.$student['name'].'</b>. Hiện tại em chưa thanh toán <b>'.$text.'</b>. 
     Em cần đóng trước khi hết hạn thanh toán onl!. Nếu không thanh toán đúng hạn, em cần lên ban quản lý để đóng tiền trược tiếp.
     <p style="text-align: center;">Kí túc xá Đại học Giao thông Vận tải Hà nội</p>
@@ -106,6 +106,31 @@ if(isset($_GET['student_id'])){
                     }
                 </script>';
 }
+// nhắc nhở sinh viên trong phòng chưa đóng tiền điện nước
+if(isset($_GET['room_id'])){
+    $room_id = $_GET['room_id'];
+    $sql_student = "SELECT * FROM student s
+                INNER JOIN contract c ON s.student_id = c.student_id
+                INNER JOIN room r ON c.room_id = r.room_id
+                WHERE r.room_id = '".$room_id."' 
+                LIMIT 1  ";
+    $student = mysqli_query($conn, $sql_student)->fetch_assoc();
+    // sử dụng các biến chung để gọi file này nhiều lần
+    $student_email = $student['email'];
+    $subject = 'Thong bao thanh toan tien dien nuoc';
+    $body = '<p>Chào em <b>'.$student['name'].'</b>. Phòng <b>'.$student['room_name'].'</b> chưa thanh toán tiền điện nước theo tháng.
+    Các em cần đóng trước khi hết hạn thanh toán onl!. Nếu không thanh toán đúng hạn, em cần lên ban quản lý để đóng tiền trược tiếp.
+    <p style="text-align: center;">Kí túc xá Đại học Giao thông Vận tải Hà nội</p>
+    <p style="text-align: center;">Trung tâm hỗ trợ sinh viên - Phòng Công tác sinh viên</p>
+    <p style="text-align: center;">Điện thoại văn phòng: 0292.9992773 - Điện thoại di động: 0977823399 (Zalo)</p>';
+    $message = '<script type="text/javascript">
+                    alert("Gửi thông báo thành công!");
+                    window.onload = function () { 
+                        window.location.href = "ds_phong_chua_dong_tien_diennuoc.php";
+                    }
+                </script>';
+}
+
 //Create an instance; passing `true` enables exceptions
 $mail = new PHPMailer(true);
 

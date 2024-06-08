@@ -70,7 +70,7 @@ if(isset($_GET['trang'])){
                                                 <td><?php echo $row_room['price'];?></td>
 
                                                 <td><?php echo $row_room['status_bill'] == false ?  "Chưa thanh toán" : "Đã thanh toán" ; ?></td>
-                                                <td>Nhắc nhở</td>
+                                                <td><li class="breadcrumb-item"><a href="admin_send_email.php?room_id=<?php echo $row_room['room_id'];?>">Nhắc nhở</a></li></td>
                                                 <td><li class="breadcrumb-item"><a href="">Nộp tiền mặt</a></li></td>
                                             </tr>
                                             <?php }} ?>

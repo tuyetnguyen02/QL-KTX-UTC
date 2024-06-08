@@ -44,8 +44,9 @@ $dichvu = queryResult($conn,$sql_dichvu);
                                 <td><?php echo $row['description'];?></td>
                                 <td><?php echo $row['price']?> đ/<?php  if($row['services_name'] == "Điện" || $row['services_name'] == "Nước") echo "số"; else echo "tháng";?></td>
                                 <td style="color : <?php if($row['enable']) echo "green"; else echo "red";?>"><?php if($row['enable']) echo "Hoạt động tốt"; else echo "Đang sửa chữa";?></span></td>
-                                <td><li class="breadcrumb-item" id="editroom-btn-open"><a href="">Sửa</a></li></td>
-                                <!-- <td><button class="btn btn-link btn-rounded btn-fw" id="editroom-btn-open" style="font-size: 16px;">Sửa</button></td> -->
+                                <!-- <td><li class="breadcrumb-item" id="editroom-btn-open"><a href="">Sửa</a></li></td> -->
+                                <!-- <td><button class="btn btn-link " id="editroom-btn-open" style="font-size: 14px; "> Sửa</button></td> -->
+                                <td><button class="btn btn-link" id="editroom-btn-open" style="font-size: 14px;">Sửa</button></td>
                                 <td><li class="breadcrumb-item"><a href="action/dich_vu/delete_services.php?services_id=<?php echo $row['services_id'];?>">Xoá</a></li></td>
                             </tr>
                             <?php } ?>
@@ -199,23 +200,6 @@ $dichvu = queryResult($conn,$sql_dichvu);
         const closeeditroom = document.getElementById('editroom-btn-close');
  
         const modal_container_editroom = document.getElementById('editroom-modal-container');
- 
-//         $(document).ready(function(){
-//             $('.editroom-btn-open').click(function(){
-//                 // var serviceId = $(this).database('services_id');
-//                 //var serviceId = $(this).data('service-id');
-//                 var serviceName = $(this).data('services_name');
-//                 var serviceDescription = $(this).data('description');
-//                 var servicePrice = $(this).data('price');
-//                 var serviceStatus = $(this).data('enable');
-// 9
-//                 // $('#services_id').val(serviceId);
-//                 $('#services_name').val(serviceName);
-//                 $('#description').val(serviceDescription);
-//                 $('#price').val(servicePrice);
-//                 $('#enable').val(serviceStatus);
-//             });
-//         });
 
         openeditroom.addEventListener('click', ()=>{
             modal_container_editroom.classList.add('show');
@@ -226,5 +210,32 @@ $dichvu = queryResult($conn,$sql_dichvu);
 
         
     </script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+        $(document).ready(function(){
+            // Xử lý sự kiện khi nhấn vào nút "Sửa"
+            $("button#editroom-btn-open").click(function(){
+                // Lấy dữ liệu từ các ô trong hàng (tr) tương ứng
+                var services_name = $(this).closest("tr").find("td:eq(1)").text();
+                var description = $(this).closest("tr").find("td:eq(2)").text();
+                var price = $(this).closest("tr").find("td:eq(3)").text().split(' ')[0];
+                var enable = $(this).closest("tr").find("td:eq(4)").text().trim() == "Hoạt động tốt" ? "1" : "0";
 
+                // Đổ dữ liệu lấy được lên modal
+                $("#services_name").val(services_name);
+                $("#description").val(description);
+                $("#price").val(price);
+                $("#enable").val(enable);
+                
+                // Hiển thị modal
+                $("#editroom-modal-demo").show();
+            });
+
+            // Xử lý sự kiện khi nhấn nút đóng modal
+            $("button#editroom-btn-close").click(function(){
+                // Ẩn modal
+                $("#editroom-modal-demo").hide();
+            });
+        });
+    </script>
 <?php require(__DIR__.'/layouts/footer.php'); ?> 

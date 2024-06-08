@@ -1,6 +1,6 @@
 <?php require(__DIR__.'/layouts/header.php'); ?> 
 <?php
-$sql_hocky = "SELECT * FROM semester ";
+$sql_hocky = "SELECT * FROM semester ORDER BY start_date DESC";
 $hocky = queryResult($conn,$sql_hocky);
 
 ?>
@@ -47,7 +47,7 @@ $hocky = queryResult($conn,$sql_hocky);
                                 <td><?php echo date("d-m-Y", strtotime($row['registration_startdate'])); ?></td>
                                 <td><?php echo date("d-m-Y", strtotime($row['registration_enddate'])); ?></td>
                                 <td style="color : <?php if($row['status']) echo "green"; else echo "red";?>"><?php if($row['status']) echo "Đang hoạt động"; else echo "Không hoạt động";?></span></td>
-                                <td><li class="breadcrumb-item"><a href="">Sửa</a></li></td>
+                                <td><button class="btn btn-link" id="editroom-btn-open" style="font-size: 14px;">Sửa</button></td>
                                 <td><li class="breadcrumb-item"><a href="action/hoc_ky/delete_semester.php?semester_id=<?php echo $row['semester_id'];?>">Xoá</a></li></td>
                             </tr>
                             <?php } ?>
@@ -143,6 +143,66 @@ $hocky = queryResult($conn,$sql_hocky);
             </div>
             <!-- modal add room on roomtype end-->
         </div>
+        <div class="row">
+            <!-- modal edit roomtype room start-->
+            <div class="col-lg-6 grid-margin stretch-card" id="editroom-wrapper">
+                <div class="card" id="editroom-modal-container">
+                    <div class="card-body">
+                        <!-- <div id="demo-wrapper">
+                            <div id="demo-modal-container"> -->
+                                <div class="editroom-modal" id="editroom-modal-demo">
+                                    <div class="editroom-modal-header page-header" style="border-bottom: 2px solid #8e94a9; padding-bottom:10px">
+                                        <h3 class="page-title"> Chỉnh sửa thông tin dịch vụ </h3>
+                                        <button style="border:0px" id="editroom-btn-close"><i class="mdi mdi-close"></i></button>
+                                    </div>
+                                    <div class="editroom-body card-body" style="padding: 0rem 2.5rem;">
+                                        <form action="action/edit_roomtype.php?id=<?php echo $roomtype_id;?>" method="POST">
+                                            <div class="form-group row">
+                                                <label class="col-sm-3 col-form-label" style="color:black;" >Tên dịch vụ</label>
+                                                <div class="col-sm-9">
+                                                    <input type="text" class="form-control" id="services_name" disabled name="services_name">
+                                                </div>
+                                            </div>
+                                            <div class="form-group row">
+                                                <label class="col-sm-3 col-form-label" style="color:black;" >Mô tả</label>
+                                                <div class="col-sm-9">
+                                                    <input type="text" class="form-control" id="description" name="description">
+                                                </div>
+                                            </div>
+                                            <div class="form-group row">
+                                                <label class="col-sm-3 col-form-label" style="color:black;">Giá tiền (VNĐ)</label>
+                                                <div class="col-sm-9">
+                                                    <input type="number" class="form-control" id="price" required name="price" >
+                                                </div>
+                                            </div>
+                                            <div class="form-group row">
+                                                <label class="col-sm-3 col-form-label" style="color:black;">Tình trạng</label>
+                                                <div class="col-sm-9">
+                                                    <select class="form-control" id="enable" required name="enable">
+                                                        <option value="" style="display: none;"></option>
+                                                        <option value="1">Hoạt động tốt</option>
+                                                        <option value="0">Đang sửa chữa</option>
+                                                    </select>
+                                                </div><label style="color:red;" >*Lưu ý : Hãy luôn đảm bảo thông tin là chính xác nhất!</label>
+                                            </div>
+                                            
+                                            <div class="form-group row">
+                                                <div class="col-12 btn--seve" >
+                                                    <button type="submit" class="btn btn-outline-success btn-fw "style=" float: right;"> Cập nhật </button>
+                                                </div>
+                                            </div>
+                                            
+                                            
+                                        </form>
+                                    </div>
+                                </div>
+                            <!-- </div>
+                        </div> -->
+                    </div>
+                </div>
+            </div>
+            <!-- modal edit roomtype end-->
+        </div>
     </div>
         
     <!-- content-wrapper ends -->
@@ -159,6 +219,47 @@ $hocky = queryResult($conn,$sql_hocky);
         close.addEventListener('click', ()=>{
             modal_container.classList.remove('show');
         });
-    </script>
 
+        const openeditroom = document.getElementById('editroom-btn-open');
+        // console.log(show);
+        const closeeditroom = document.getElementById('editroom-btn-close');
+ 
+        const modal_container_editroom = document.getElementById('editroom-modal-container');
+
+        openeditroom.addEventListener('click', ()=>{
+            modal_container_editroom.classList.add('show');
+        });
+        closeeditroom.addEventListener('click', ()=>{
+            modal_container_editroom.classList.remove('show');
+        });
+
+    </script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+        $(document).ready(function(){
+            // Xử lý sự kiện khi nhấn vào nút "Sửa"
+            $("button#editroom-btn-open").click(function(){
+                // Lấy dữ liệu từ các ô trong hàng (tr) tương ứng
+                var services_name = $(this).closest("tr").find("td:eq(1)").text();
+                var description = $(this).closest("tr").find("td:eq(2)").text();
+                var price = $(this).closest("tr").find("td:eq(3)").text().split(' ')[0];
+                var enable = $(this).closest("tr").find("td:eq(4)").text().trim() == "Hoạt động tốt" ? "1" : "0";
+
+                // Đổ dữ liệu lấy được lên modal
+                $("#services_name").val(services_name);
+                $("#description").val(description);
+                $("#price").val(price);
+                $("#enable").val(enable);
+                
+                // Hiển thị modal
+                $("#editroom-modal-demo").show();
+            });
+
+            // Xử lý sự kiện khi nhấn nút đóng modal
+            $("button#editroom-btn-close").click(function(){
+                // Ẩn modal
+                $("#editroom-modal-demo").hide();
+            });
+        });
+    </script>
 <?php require(__DIR__.'/layouts/footer.php'); ?> 

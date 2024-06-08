@@ -14,6 +14,9 @@ $student = queryResult($conn, $sql_student);
 $sql_major = "SELECT major FROM student GROUP BY major";
 $major = mysqli_query($conn, $sql_major);
 
+if(isset($_POST['btn_Export'])){
+    echo '<script>window.location.href = "action/xuat_excel/xuat_excel_ds_sinhvien.php";</script>';
+}
 ?>
 
 <div class="main-panel"><!--style="padding : 20px 10px; box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);" -->
@@ -23,12 +26,17 @@ $major = mysqli_query($conn, $sql_major);
                 <div class="card-body"style="overflow: auto;">
                     <div class="page-header">
                         <h3 class="page-title"> QUẢN LÝ SINH VIÊN </h3>
-                        <!-- <nav aria-label="breadcrumb">
+                        <nav aria-label="breadcrumb">
                             <ol class="breadcrumb">
-                            <li class="breadcrumb-item"><a href="">Thêm học kỳ</a></li>
-                            <li class="breadcrumb-item active" aria-current="page">Basic tables</li>
+                                <form method="POST">
+                                    <button class="btn btn-link btn-rounded btn-fw" 
+                                            name="btn_Export" type="Submit" style="font-size: 16px;">
+                                            In danh sách
+                                    </button>    
+                                </form>
+                                
                             </ol>
-                        </nav> -->
+                        </nav>
                     </div>
                     <div class="row">
                         <!-- Lọc danh dách sinh viên theo từng loại tiêu chí -->
