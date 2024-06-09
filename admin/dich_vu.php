@@ -130,11 +130,11 @@ $dichvu = queryResult($conn,$sql_dichvu);
                                         <button style="border:0px" id="editroom-btn-close"><i class="mdi mdi-close"></i></button>
                                     </div>
                                     <div class="editroom-body card-body" style="padding: 0rem 2.5rem;">
-                                        <form action="action/edit_roomtype.php?id=<?php echo $roomtype_id;?>" method="POST">
+                                        <form action="action/dich_vu/edit_services.php" method="POST">
                                             <div class="form-group row">
                                                 <label class="col-sm-3 col-form-label" style="color:black;" >Tên dịch vụ</label>
                                                 <div class="col-sm-9">
-                                                    <input type="text" class="form-control" id="services_name" disabled name="services_name">
+                                                    <input type="text" class="form-control" id="services_name" placeholder="services_name" readonly name="services_name">
                                                 </div>
                                             </div>
                                             <div class="form-group row">

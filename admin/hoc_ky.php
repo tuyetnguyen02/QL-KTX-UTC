@@ -120,7 +120,7 @@ $hocky = queryResult($conn,$sql_hocky);
                                                         <div class="col-sm-7    ">
                                                             <select class="form-control" required name="status">
                                                                 <option value="" style="display: none;"></option>
-                                                                <option value="1">Đang động tốt</option>
+                                                                <option value="1">Đang hoạt động</option>
                                                                 <option value="0">Không hoạt động</option>
                                                             </select><br><label style="color:red;" >*Lưu ý : Hãy luôn đảm bảo thông tin là chính xác nhất!</label>
                                                         </div>
@@ -145,54 +145,81 @@ $hocky = queryResult($conn,$sql_hocky);
         </div>
         <div class="row">
             <!-- modal edit roomtype room start-->
-            <div class="col-lg-6 grid-margin stretch-card" id="editroom-wrapper">
+            <div class="col-lg-12 grid-margin stretch-card" id="editroom-wrapper">
                 <div class="card" id="editroom-modal-container">
                     <div class="card-body">
                         <!-- <div id="demo-wrapper">
                             <div id="demo-modal-container"> -->
-                                <div class="editroom-modal" id="editroom-modal-demo">
+                                <div class="editroom-modal addroomtype-nodal" id="editroom-modal-demo">
                                     <div class="editroom-modal-header page-header" style="border-bottom: 2px solid #8e94a9; padding-bottom:10px">
-                                        <h3 class="page-title"> Chỉnh sửa thông tin dịch vụ </h3>
+                                        <h3 class="page-title"> Chỉnh sửa thông tin học kỳ </h3>
                                         <button style="border:0px" id="editroom-btn-close"><i class="mdi mdi-close"></i></button>
                                     </div>
                                     <div class="editroom-body card-body" style="padding: 0rem 2.5rem;">
-                                        <form action="action/edit_roomtype.php?id=<?php echo $roomtype_id;?>" method="POST">
-                                            <div class="form-group row">
-                                                <label class="col-sm-3 col-form-label" style="color:black;" >Tên dịch vụ</label>
-                                                <div class="col-sm-9">
-                                                    <input type="text" class="form-control" id="services_name" disabled name="services_name">
+                                        <form action="action/hoc_ky/edit_semester.php" method="POST">
+                                            <div class="row">
+                                                <div class="form-group col-sm-6 row">
+                                                    <div class="form-group row col-sm-12 ">
+                                                        <label class="col-sm-5 col-form-label" style="color:black;" required>Học kỳ</label>
+                                                        <div class="col-sm-7">
+                                                            <!-- <select class="form-control" id="semester" readonly required name="semester">
+                                                                <option value="" style="display: none;"></option>
+                                                                    <option value="1">1</option>
+                                                                    <option value="2">2</option>
+                                                            </select> -->
+                                                            <input type="text" class="form-control" id="semester" placeholder="semester" readonly name="semester">
+                                                        </div>
+                                                    </div>
+                                                    <div class="form-group row col-sm-12">
+                                                        <label class="col-sm-5 col-form-label" style="color:black;" required>Năm học</label>
+                                                        <div class="col-sm-7">
+                                                            <input type="text" class="form-control" id="school_year" placeholder="school_year" readonly name="school_year">
+                                                        </div>
+                                                    </div>
+                                                    <div class="form-group row col-sm-12">
+                                                        <label class="col-sm-5 col-form-label" style="color:black;" required>Ngày bắt đầu</label>
+                                                        <div class="col-sm-7">
+                                                            <input type="date" class="form-control" id="start_date" required name="start_date">
+                                                        </div>
+                                                    </div>
+                                                    <div class="form-group row col-sm-12">
+                                                        <label class="col-sm-5 col-form-label" style="color:black;" required >Ngày kết thúc</label>
+                                                        <div class="col-sm-7">
+                                                            <input type="date" class="form-control" id="end_date" required name="end_date">
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-sm-6 form-group row">
+                                                    <div class="form-group row col-sm-12">
+                                                        <label  style="color:black;" class="col-sm-5 col-form-label">Ngày bắt đầu đăng ký</label>
+                                                        <div class="col-sm-7">
+                                                            <input type="date" class="form-control" id="registration_startdate" required name="registration_startdate">
+                                                        </div>
+                                                    </div>
+                                                    <div class="form-group row col-sm-12">
+                                                        <label style="color:black;" class="col-sm-5 col-form-label">Ngày kết thúc đăng ký</label>
+                                                        <div class="col-sm-7">
+                                                            <input type="date" class="form-control" id="registration_enddate" required name="registration_enddate">
+                                                        </div>
+                                                    </div>
+                                                    <div class="form-group row col-sm-12">
+                                                        <label style="color:black;" class="col-sm-5 col-form-label">Trạng thái phòng</label>
+                                                        <div class="col-sm-7    ">
+                                                            <select class="form-control" id="status" required name="status">
+                                                                <option value="" style="display: none;"></option>
+                                                                <option value="1">Đang hoạt động</option>
+                                                                <option value="0">Không hoạt động</option>
+                                                            </select><br><label style="color:red;" >*Lưu ý : Hãy luôn đảm bảo thông tin là chính xác nhất!</label>
+                                                        </div>
+                                                    </div>
                                                 </div>
                                             </div>
                                             <div class="form-group row">
-                                                <label class="col-sm-3 col-form-label" style="color:black;" >Mô tả</label>
-                                                <div class="col-sm-9">
-                                                    <input type="text" class="form-control" id="description" name="description">
+                                                <div class="col-12 btn--seve">
+                                                    <button type="submit" class="btn btn-outline-success btn-fw"style=" float: right;"> Cập nhật </button>
+                                                    <!-- <button type="submit" class="btn btn-primary mr-2">Submit</button> -->
                                                 </div>
                                             </div>
-                                            <div class="form-group row">
-                                                <label class="col-sm-3 col-form-label" style="color:black;">Giá tiền (VNĐ)</label>
-                                                <div class="col-sm-9">
-                                                    <input type="number" class="form-control" id="price" required name="price" >
-                                                </div>
-                                            </div>
-                                            <div class="form-group row">
-                                                <label class="col-sm-3 col-form-label" style="color:black;">Tình trạng</label>
-                                                <div class="col-sm-9">
-                                                    <select class="form-control" id="enable" required name="enable">
-                                                        <option value="" style="display: none;"></option>
-                                                        <option value="1">Hoạt động tốt</option>
-                                                        <option value="0">Đang sửa chữa</option>
-                                                    </select>
-                                                </div><label style="color:red;" >*Lưu ý : Hãy luôn đảm bảo thông tin là chính xác nhất!</label>
-                                            </div>
-                                            
-                                            <div class="form-group row">
-                                                <div class="col-12 btn--seve" >
-                                                    <button type="submit" class="btn btn-outline-success btn-fw "style=" float: right;"> Cập nhật </button>
-                                                </div>
-                                            </div>
-                                            
-                                            
                                         </form>
                                     </div>
                                 </div>
@@ -240,16 +267,27 @@ $hocky = queryResult($conn,$sql_hocky);
             // Xử lý sự kiện khi nhấn vào nút "Sửa"
             $("button#editroom-btn-open").click(function(){
                 // Lấy dữ liệu từ các ô trong hàng (tr) tương ứng
-                var services_name = $(this).closest("tr").find("td:eq(1)").text();
-                var description = $(this).closest("tr").find("td:eq(2)").text();
-                var price = $(this).closest("tr").find("td:eq(3)").text().split(' ')[0];
-                var enable = $(this).closest("tr").find("td:eq(4)").text().trim() == "Hoạt động tốt" ? "1" : "0";
+                var semester = $(this).closest("tr").find("td:eq(0)").text().trim();
+                var school_year = $(this).closest("tr").find("td:eq(1)").text().trim();
+                var start_date = $(this).closest("tr").find("td:eq(2)").text().trim();
+                var end_date = $(this).closest("tr").find("td:eq(3)").text().trim();
+                var registration_startdate = $(this).closest("tr").find("td:eq(4)").text().trim();
+                var registration_enddate = $(this).closest("tr").find("td:eq(5)").text().trim();
+                var status = $(this).closest("tr").find("td:eq(6)").text().trim() == "Đang hoạt động" ? "1" : "0";
 
+
+                start_date = start_date.split('-').reverse().join('-');
+                end_date = end_date.split('-').reverse().join('-');
+                registration_startdate = registration_startdate.split('-').reverse().join('-');
+                registration_enddate = registration_enddate.split('-').reverse().join('-');
                 // Đổ dữ liệu lấy được lên modal
-                $("#services_name").val(services_name);
-                $("#description").val(description);
-                $("#price").val(price);
-                $("#enable").val(enable);
+                $("#semester").val(semester);
+                $("#school_year").val(school_year);
+                $("#start_date").val(start_date);
+                $("#end_date").val(end_date);
+                $("#registration_startdate").val(registration_startdate);
+                $("#registration_enddate").val(registration_enddate);
+                $("#status").val(status);
                 
                 // Hiển thị modal
                 $("#editroom-modal-demo").show();

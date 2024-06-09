@@ -142,7 +142,7 @@
                                                 <td><span class="legend-label <?php if($room['enable']) echo "text-success"; else echo "text-danger";?>"><?php if($room['enable']) echo "Đang hoạt động"; else echo "Đang sửa chữa";?></span></td>
                                                 <td><?php if($roomtype['is_cooked']) echo "Cho phép"; else echo "Không cho phép";?></td>
                                                 <td><?php if($roomtype['is_air_conditioned']) echo "Có"; else echo "Không";?></td>
-                                                <td> $ 77.99 </td>
+                                                <td> </td>
                                             </tr>
 
                                         </tbody>
