@@ -46,7 +46,7 @@ if(isset($_GET['trang'])){
         <div class="breadcrumb-contents">
             <nav aria-label="breadcrumb">
                 <ol class="breadcrumb">
-                    <li class="breadcrumb-item"><a href="index.html">Trang Chủ</a></li>
+                    <li class="breadcrumb-item"><a href="index.html">Trang chủ</a></li>
                     <li class="breadcrumb-item active">Loại phòng</li>
                 </ol>
             </nav>
@@ -220,8 +220,8 @@ if(isset($_GET['trang'])){
                                     </div>
                                 </div>
                                 <div class="d-flex justify-content-between total font-weight-bold ">
-                                    <span><i class="fa fa-money-check-alt"> </i> Giá</span
-                                    ><span><?php echo $row['price']?>đ/tháng</span> 
+                                    <span><i class="fa fa-money-check-alt"> </i> Giá</span>
+                                    <span class="money"><?php echo $row['price']?> vnđ/tháng</span> 
                                 </div>
                             </div>
                         
@@ -230,9 +230,6 @@ if(isset($_GET['trang'])){
                 </div>
 
             <?php } ?>
-            
-            
-            
         </div>
         
     </div>
@@ -334,6 +331,23 @@ if(isset($_GET['trang'])){
         });
     });
   });
+  // css tiền
+  document.addEventListener('DOMContentLoaded', function () {
+    function formatCurrency(number) {
+        return number.toLocaleString('vi-VN');
+    }
+
+    var priceElements = document.querySelectorAll('.money');
+
+    priceElements.forEach(function(priceElement) {
+        var priceText = priceElement.textContent;
+        var priceValue = parseInt(priceText.replace(' đ/tháng', '').replace(/\./g, ''));
+
+        if (!isNaN(priceValue)) {
+            priceElement.textContent = formatCurrency(priceValue) + ' đ/tháng';
+        }
+    });
+});
 </script>
 
 <?php require(__DIR__.'/layouts/footer.php'); ?>

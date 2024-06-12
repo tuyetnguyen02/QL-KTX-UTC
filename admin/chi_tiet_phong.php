@@ -249,7 +249,7 @@
                                                 <td><?php echo $row['final_electricity'];?></td>
                                                 <td><?php echo $row['initial_water'];?></td>
                                                 <td><?php echo $row['final_water'];?></td>
-                                                <td><?php echo $row['price'];?> (VNĐ)</td>
+                                                <td><spam class="money"><?php echo $row['price'];?> (VNĐ)</spam></td>
                                                 <td><?php echo $row['name'] ; ?></td>
                                                 <td><?php $sql_admin1 = "SELECT admin_name FROM admin WHERE admin_id = '".$row['admin_id1']."'";
                                                             $admin1 = mysqli_query($conn, $sql_admin1)->fetch_assoc();
@@ -455,6 +455,24 @@
         </div>
     </div>
     <script>
+         // css money
+         document.addEventListener('DOMContentLoaded', function () {
+            function formatCurrency(number) {
+                return number.toLocaleString('vi-VN');
+            }
+
+            var priceElements = document.querySelectorAll('.money');
+
+            priceElements.forEach(function(priceElement) {
+                var priceText = priceElement.textContent;
+                var priceValue = parseInt(priceText.replace(' (VNĐ)', '').replace(/\./g, ''));
+
+                if (!isNaN(priceValue)) {
+                    priceElement.textContent = formatCurrency(priceValue) + ' (VNĐ)';
+                }
+            });
+        });
+
         const open = document.getElementById('addroom-btn-open');
         // console.log(show);
         const close = document.getElementById('addroom-btn-close');
@@ -494,7 +512,8 @@
         closeeditbill.addEventListener('click', ()=>{
             modal_containereditbill.classList.remove('show');
         });
-
-    </script>
+        
+       
+        </script>
 
 <?php require(__DIR__.'/layouts/footer.php'); ?> 

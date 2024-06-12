@@ -46,7 +46,7 @@ require('./database/query.php');
                             <div class="main-navigation flex-lg-right">
                                 <ul class="main-menu menu-right " style="display: -webkit-inline-box;">
                                     <li class="menu-item"> 
-                                        <a href="index.php"><i class="fas fa-home"></i> Trang Chủ</a>
+                                        <a href="index.php"><i class="fas fa-home"></i> Trang chủ</a>
                                     </li>
                                     <li class="menu-item">
                                         <a href="loai_phong.php"><i class="fas fa-building"></i> Loại phòng</a>
@@ -98,7 +98,7 @@ require('./database/query.php');
                         <div class="main-navigation flex-lg-right">
                             <ul class="main-menu menu-right ">
                                 <li class="menu-item"> 
-                                    <a href="index.php"><i class="fas fa-home"></i> Trang Chủ</a>
+                                    <a href="index.php"><i class="fas fa-home"></i> Trang chủ</a>
                                 </li>
                                 <li class="menu-item">
                                     <a href="loai_phong.php"><i class="fas fa-building"></i> Loại phòng</a>

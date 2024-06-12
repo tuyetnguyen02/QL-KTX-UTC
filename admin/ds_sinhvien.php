@@ -87,6 +87,7 @@ if(isset($_POST['btn_Export'])){
                         <!-- </form> -->
                         
                     </div>
+                    <br>
                     <!-- <h4 class="card-title">QUẢN LÝ LOẠI PHÒNG</h4>
                     <li class="breadcrumb-item"><a href="#">Thêm loại phòng</a></li> -->
                     <table class="table table-hover" >

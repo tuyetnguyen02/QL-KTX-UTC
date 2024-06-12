@@ -81,7 +81,7 @@
                                             <span class="legend-label text-dark">Số lượng tối đa : <?php echo $roomtype['max_quantity']; ?> sinh viên</span>
                                         </li>
                                         <li>
-                                            <span class="legend-label text-dark" >Giá tiền : <?php echo $roomtype['price']?> đ/tháng</span>
+                                            <span class="legend-label text-dark" >Giá tiền : <spam class="money"><?php echo $roomtype['price']?> đ/tháng</spam></span>
                                         </li>
                                         <li>
                                             <span class="legend-label <?php if($roomtype['enable']) echo "text-success"; else echo "text-danger";?>"><?php if($roomtype['enable']) echo "Đang hoạt động"; else echo "Đang sửa chữa";?></span>
@@ -330,7 +330,23 @@
         closeeditroom.addEventListener('click', ()=>{
             modal_container_editroom.classList.remove('show');
         });
+        // css money
+        document.addEventListener('DOMContentLoaded', function () {
+            function formatCurrency(number) {
+                return number.toLocaleString('vi-VN');
+            }
 
+            var priceElements = document.querySelectorAll('.money');
+
+            priceElements.forEach(function(priceElement) {
+                var priceText = priceElement.textContent;
+                var priceValue = parseInt(priceText.replace(' vnđ/tháng', '').replace(/\./g, ''));
+
+                if (!isNaN(priceValue)) {
+                    priceElement.textContent = formatCurrency(priceValue) + ' vnđ/tháng';
+                }
+            });
+        });
     </script>
 
     <!-- content-wrapper ends -->

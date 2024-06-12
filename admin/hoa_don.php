@@ -63,7 +63,7 @@ if(isset($_POST['btn_Export'])){
                                 <td><?php if($row['bill_id'] != null) echo "X";?></td>
                                 <td><?php echo $row['datetime'];?></td>
                                 <td><?php echo $row['method'];?></td>
-                                <td><?php echo $row['total_price'];?></td>
+                                <td class="money"><?php echo $row['total_price'];?></td>
                             </tr>
                             <?php } ?>
                         </tbody>
@@ -125,6 +125,23 @@ if(isset($_POST['btn_Export'])){
     </script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script>
+        // css money
+        document.addEventListener('DOMContentLoaded', function () {
+            function formatCurrency(number) {
+                return number.toLocaleString('vi-VN');
+            }
+
+            var priceElements = document.querySelectorAll('.money');
+
+            priceElements.forEach(function(priceElement) {
+                var priceText = priceElement.textContent;
+                var priceValue = parseInt(priceText.replace(' (VNĐ)', '').replace(/\./g, ''));
+
+                if (!isNaN(priceValue)) {
+                    priceElement.textContent = formatCurrency(priceValue) + ' (VNĐ)';
+                }
+            });
+        });
         // sử lý tìm kiếm với ajax
         $(document).ready(function(){
             $("#timkiem").on('input', function(event){

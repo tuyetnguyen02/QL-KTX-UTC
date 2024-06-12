@@ -107,7 +107,7 @@ $total_dichvu = 0;
             <div class="breadcrumb-contents">
                 <nav aria-label="breadcrumb">
                     <ol class="breadcrumb">
-                        <li class="breadcrumb-item"><a href="index.php">Trang Chủ</a></li>
+                        <li class="breadcrumb-item"><a href="index.php">Trang chủ</a></li>
                         <li class="breadcrumb-item active">Thông tin cá nhân</li>
                     </ol>
                 </nav>
@@ -126,7 +126,7 @@ $total_dichvu = 0;
                                 <!-- thong tin tài khoản -->
                                 <div class="" id="account-info" role="tabpanel">
                                     <div class="myaccount-content">
-                                        <h3>Thông Tin Sinh Viên</h3>
+                                        <h3>Thông tin sinh viên</h3>
                                         <div class="account-details-form">
                                             <form method="GET">
                                                 <div class="row">
@@ -201,7 +201,7 @@ $total_dichvu = 0;
                                 <!-- thong tin tài khoản -->
                                 <div class="" id="account-info" role="tabpanel">
                                     <div class="myaccount-content">
-                                        <h3>Dịch Vụ Đăng Ký</h3>
+                                        <h3>Dịch vụ đăng ký</h3>
                                         <div class="account-details-form">
                                             <!-- <form method="GET"> -->
                                                 <div class="row">
@@ -253,13 +253,15 @@ $total_dichvu = 0;
                                                                     break;  
                                                                 default:
                                                                     ?>
-                                                                    <p class="col-9 " style="color: blue;">Chưa đăng kí dịch vụ</p>
+                                                                    <p class="col-6 " style="color: blue;">Chưa đăng kí phòng</p>
+                                                                    <p class="col-2 text-warning" ><a href="loai_phong.php">Đăng ký</a></p>
                                                                     <?php
                                                                     break;
                                                             }
                                                             ?>
                                                         <?php } else{?>
-                                                            <p class="col-9 ">Chưa đăng kí dịch vụ</p>
+                                                            <p class="col-6 " style="color: blue;">Chưa đăng kí phòng</p>
+                                                            <p class="col-2 text-warning" ><a href="loai_phong.php">Đăng ký</a></p>
                                                             <?php }?>
                                                     </div>
                                                     <div class="col-12">
@@ -281,7 +283,8 @@ $total_dichvu = 0;
                                                                 <p class="col-1" style="color : red;"><a href="action/huy_dichvu.php?register_services_id=<?php echo $guixe_dap['register_services_id'];?>">Huỷ</a></p><?php }else {?>
                                                                     <p class="col-4 text-success" >Đã thanh toán</p>
                                                             <?php } }else{?>
-                                                                <p class="col-9 " >Chưa đăng kí dịch vụ</p>
+                                                                <p class="col-6 ">Chưa đăng kí dịch vụ</p>
+                                                                <p class="col-2 text-warning" ><a href="dich_vu.php">Đăng ký</a></p>
                                                                 <?php }} ?>
                                                     </div>
 
@@ -298,7 +301,8 @@ $total_dichvu = 0;
                                                             <p class="col-1" style="color : red;"><a href="action/huy_dichvu.php?register_services_id=<?php echo $vesinh['register_services_id'];?>">Huỷ</a></p><?php }else{?>
                                                             <p class="col-9 text-success" >Đã thanh toán</p>
                                                             <?php } } else { ?>
-                                                            <p class="col-9 " >Chưa đăng kí dịch vụ</p>
+                                                            <p class="col-6 " >Chưa đăng kí dịch vụ</p>
+                                                            <p class="col-2 text-warning" ><a href="dich_vu.php">Đăng ký</a></p>
                                                             <?php }?>
                                                     </div>
                                                     <?php if($total_dichvu != 0): ?>
@@ -389,8 +393,8 @@ $total_dichvu = 0;
                                 <td><?php echo $row['final_electricity'];?></td>
                                 <td><?php echo $row['initial_water'];?></td>
                                 <td><?php echo $row['final_water'];?></td>
-                                <td><?php echo $row['price'];?> (VNĐ)</td>
-                                <td><?php echo $row['created_date'];?></td>
+                                <td class="money"><?php echo $row['price'];?> (VNĐ)</td>
+                                <td><?php echo date("d-m-Y", strtotime($row['created_date'])); ?></td>
                                 <?php if($row['status_bill']){?>
                                     <td class="text-success">Đã thanh toán</td>
                                     <td></td>
@@ -480,6 +484,22 @@ $total_dichvu = 0;
         // document.getElementById("submit_btn_dv").addEventListener("click", function() {
         //     document.getElementById("form_dv").submit(); 
         // });
+        document.addEventListener('DOMContentLoaded', function () {
+            function formatCurrency(number) {
+                return number.toLocaleString('vi-VN');
+            }
+
+            var priceElements = document.querySelectorAll('.money');
+
+            priceElements.forEach(function(priceElement) {
+                var priceText = priceElement.textContent;
+                var priceValue = parseInt(priceText.replace('(VNĐ)', '').replace(/\./g, ''));
+
+                if (!isNaN(priceValue)) {
+                    priceElement.textContent = formatCurrency(priceValue) + '(VNĐ)';
+                }
+            });
+        });
     </script>
 
 <?php require(__DIR__.'/layouts/footer.php'); ?>

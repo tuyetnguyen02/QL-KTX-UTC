@@ -76,7 +76,7 @@ if(isset($_POST['btn_Export'])){
                                 <th>Máy lạnh</th>
                                 <th>Nấu ăn</th>
                                 <th>Số lượng SV</th>
-                                <th>Giá phòng</th>
+                                <th>Giá phòng(tháng)</th>
                                 <th>Hình ảnh</th>
                                 <th>Hoạt động</th>
                                 <th>Tác vụ</th>
@@ -90,7 +90,7 @@ if(isset($_POST['btn_Export'])){
                                 <td><?php if(!$row['is_air_conditioned']) echo "Có"; else echo "Không";?></td>
                                 <td><?php if(!$row['is_cooked']) echo "Cho phép"; else echo "Không cho phép";?></td>
                                 <td><?php echo $row['max_quantity']; ?></td>
-                                <td><?php echo $row['price']?> đ/tháng</td>
+                                <td class="money"><?php echo $row['price']?> đ/tháng</td>
                                 <td class="img_admin"><img src="../<?php echo $row['url_image'];?>" alt="product" /></td>
                                 <td style="color : <?php if($row['enable']) echo "green"; else echo "red";?>"><?php if($row['enable']) echo "Hoạt động tốt"; else echo "Đang sửa chữa";?></span></td>
                                 <td><li class="breadcrumb-item"><a href="chi_tiet_loai_phong.php?id=<?php echo $row['room_type_id']; ?>">Chi tiết</a></li></td>
@@ -104,7 +104,7 @@ if(isset($_POST['btn_Export'])){
                                 <th>Máy lạnh</th>
                                 <th>Nấu ăn</th>
                                 <th>Số lượng SV</th>
-                                <th>Giá phòng</th>
+                                <th>Giá phòng(tháng)</th>
                                 <th>Hình ảnh</th>
                                 <th>Hoạt động</th>
                                 <th>Tác vụ</th>
@@ -275,6 +275,22 @@ if(isset($_POST['btn_Export'])){
                     }
                 });
                 return false;
+            });
+        });
+        document.addEventListener('DOMContentLoaded', function () {
+            function formatCurrency(number) {
+                return number.toLocaleString('vi-VN');
+            }
+
+            var priceElements = document.querySelectorAll('.money');
+
+            priceElements.forEach(function(priceElement) {
+                var priceText = priceElement.textContent;
+                var priceValue = parseInt(priceText.replace(' (VNĐ)', '').replace(/\./g, ''));
+
+                if (!isNaN(priceValue)) {
+                    priceElement.textContent = formatCurrency(priceValue) + ' (VNĐ)';
+                }
             });
         });
     </script>

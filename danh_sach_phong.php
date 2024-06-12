@@ -38,7 +38,7 @@
         <div class="breadcrumb-contents">
             <nav aria-label="breadcrumb">
                 <ol class="breadcrumb">
-                    <li class="breadcrumb-item"><a href="index.php">Trang Chủ</a></li>
+                    <li class="breadcrumb-item"><a href="index.php">Trang chủ</a></li>
                     <li class="breadcrumb-item"><a href="loai_phong.php">Loại phòng </a></li>
                     <li class="breadcrumb-item">Phòng loại : <?php echo $roomtype['room_type_name']; ?></li>
                 </ol>
@@ -63,20 +63,20 @@
                                 </div>
                                 <figcaption>
                                     <div>
-                                    <span style="font-weight: bold">Máy lạnh: </span>
-                                    <?php if($roomtype['is_air_conditioned']) echo "Có"; else echo "Không";?>
+                                        <span style="font-weight: bold">Máy lạnh: </span>
+                                        <?php if($roomtype['is_air_conditioned']) echo "Có"; else echo "Không";?>
                                     </div>
                                     <div>
-                                    <span style="font-weight: bold">Nấu ăn: </span>
-                                    <?php if($roomtype['is_cooked']) echo "Cho phép"; else echo "Không cho phép";?>
+                                        <span style="font-weight: bold">Nấu ăn: </span>
+                                        <?php if($roomtype['is_cooked']) echo "Cho phép"; else echo "Không cho phép";?>
                                     </div>
                                     <div>
-                                    <span style="font-weight: bold">Số lượng tối đa: </span>
-                                    <?php echo $roomtype['max_quantity']; ?> 
+                                        <span style="font-weight: bold">Số lượng tối đa: </span>
+                                        <?php echo $roomtype['max_quantity']; ?> 
                                     </div>
                                     <div>
-                                    <span style="font-weight: bold">Giá: </span>
-                                    <?php echo $roomtype['price']?>đ/tháng
+                                        <span style="font-weight: bold">Giá: </span>
+                                        <spam class="money"><?php echo $roomtype['price']?>đ/tháng</spam>
                                     </div>
                                 </figcaption>
                             </figure>
@@ -191,6 +191,22 @@
                 }
             }
         }
+        document.addEventListener('DOMContentLoaded', function () {
+            function formatCurrency(number) {
+                return number.toLocaleString('vi-VN');
+            }
+
+            var priceElements = document.querySelectorAll('.money');
+
+            priceElements.forEach(function(priceElement) {
+                var priceText = priceElement.textContent;
+                var priceValue = parseInt(priceText.replace(' vnđ/tháng', '').replace(/\./g, ''));
+
+                if (!isNaN(priceValue)) {
+                    priceElement.textContent = formatCurrency(priceValue) + ' vnđ/tháng';
+                }
+            });
+        });
     </script>
 </main>
 <?php require(__DIR__.'/layouts/footer.php'); ?>

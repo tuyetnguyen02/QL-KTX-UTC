@@ -42,7 +42,7 @@ $dichvu = queryResult($conn,$sql_dichvu);
                                 <td><?php echo $i; $i++;?></td>
                                 <td><?php echo $row['services_name'];?></td>
                                 <td><?php echo $row['description'];?></td>
-                                <td><?php echo $row['price']?> đ/<?php  if($row['services_name'] == "Điện" || $row['services_name'] == "Nước") echo "số"; else echo "tháng";?></td>
+                                <td><spam class="money"><?php echo $row['price']?></spam><?php  if($row['services_name'] == "Điện" || $row['services_name'] == "Nước") echo "số"; else echo "tháng";?></td>
                                 <td style="color : <?php if($row['enable']) echo "green"; else echo "red";?>"><?php if($row['enable']) echo "Hoạt động tốt"; else echo "Đang sửa chữa";?></span></td>
                                 <!-- <td><li class="breadcrumb-item" id="editroom-btn-open"><a href="">Sửa</a></li></td> -->
                                 <!-- <td><button class="btn btn-link " id="editroom-btn-open" style="font-size: 14px; "> Sửa</button></td> -->
@@ -212,6 +212,23 @@ $dichvu = queryResult($conn,$sql_dichvu);
     </script>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script>
+         // css money
+         document.addEventListener('DOMContentLoaded', function () {
+            function formatCurrency(number) {
+                return number.toLocaleString('vi-VN');
+            }
+
+            var priceElements = document.querySelectorAll('.money');
+
+            priceElements.forEach(function(priceElement) {
+                var priceText = priceElement.textContent;
+                var priceValue = parseInt(priceText.replace(' vnđ/', '').replace(/\./g, ''));
+
+                if (!isNaN(priceValue)) {
+                    priceElement.textContent = formatCurrency(priceValue) + ' vnđ/';
+                }
+            });
+        });
         $(document).ready(function(){
             // Xử lý sự kiện khi nhấn vào nút "Sửa"
             $("button#editroom-btn-open").click(function(){

@@ -10,26 +10,26 @@
     <li class="nav-item">
       <a class="nav-link" data-toggle="collapse" href="#ui-basic" aria-expanded="false" aria-controls="ui-basic">
         <span class="icon-bg"><i class="mdi mdi-crosshairs-gps menu-icon"></i></span>
-        <span class="menu-title">Quản lý Phòng</span>
+        <span class="menu-title">Quản lý phòng</span>
         <i class="menu-arrow"></i>
       </a>
       <div class="collapse" id="ui-basic">
         <ul class="nav flex-column sub-menu">
-          <li class="nav-item"> <a class="nav-link" href="index.php">DS Loại Phòng</a></li>
-          <li class="nav-item"> <a class="nav-link" href="danh_sach_phong.php">DS Phòng</a></li>
-          <li class="nav-item"> <a class="nav-link" href="ds_phong_chua_dong_tien_diennuoc.php">DS Phòng chưa đóng tiền điện nước</a></li>
+          <li class="nav-item"> <a class="nav-link" href="index.php">DS loại phòng</a></li>
+          <li class="nav-item"> <a class="nav-link" href="danh_sach_phong.php">DS phòng</a></li>
+          <li class="nav-item"> <a class="nav-link" href="ds_phong_chua_dong_tien_diennuoc.php">DS phòng chưa đóng tiền điện nước</a></li>
         </ul>
       </div>
     </li>
     <li class="nav-item">
       <a class="nav-link" data-toggle="collapse" href="#auth" aria-expanded="false" aria-controls="auth">
         <span class="icon-bg"><i class="mdi mdi-account-multiple menu-icon"></i></span>
-        <span class="menu-title">Quản lý Sinh viên</span>
+        <span class="menu-title">Quản lý sinh viên</span>
         <i class="menu-arrow"></i>
       </a>
       <div class="collapse" id="auth">
         <ul class="nav flex-column sub-menu">
-          <li class="nav-item"> <a class="nav-link" href="ds_sinhvien.php"> DS Sinh viên </a></li>
+          <li class="nav-item"> <a class="nav-link" href="ds_sinhvien.php"> DS sinh viên </a></li>
           <li class="nav-item"> <a class="nav-link" href="ds_sinhvien_dangky_phong.php"> DS SV đăng ký phòng</a></li>
           <li class="nav-item"> <a class="nav-link" href="ds_sv_chua_nop_tien_phong.php"> DS SV chưa nộp tiền phòng</a></li>
         </ul>
@@ -38,7 +38,7 @@
     <li class="nav-item">
       <a class="nav-link" href="dich_vu.php">
         <span class="icon-bg"><i class="mdi mdi-clipboard-text menu-icon"></i></span>
-        <span class="menu-title">Quản lý Dịch vụ</span>
+        <span class="menu-title">Quản lý dịch vụ</span>
       </a>
     </li>
     <li class="nav-item">
@@ -56,12 +56,12 @@
     <li class="nav-item">
       <a class="nav-link" href="ds_nhanvien.php">
         <span class="icon-bg"><i class="mdi mdi-table-large menu-icon"></i></span>
-        <span class="menu-title">DS Nhân viên</span>
+        <span class="menu-title">DS nhân viên</span>
       </a>
     </li>
     <li class="nav-item documentation-link">
       <a class="nav-link" href="dang_xuat.php">
-        <span class="menu-title">Log Out</span>
+        <span class="menu-title">Đăng xuất</span>
       </a>
     </li>
     <!-- <li class="nav-item sidebar-user-actions">

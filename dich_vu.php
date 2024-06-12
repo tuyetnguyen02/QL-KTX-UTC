@@ -150,7 +150,7 @@
                             <a style="cursor: pointer"><?php echo $xedap['services_name'];?></a>
                         </h4>
                         <p style="font-size: 17px">
-                            <b>Giá:</b><?php echo $xedap['price'];?> đ/tháng
+                            <b>Giá: </b><spam class="money"> <?php echo $xedap['price'];?> vnđ/tháng</spam>
                         </p>
                         <p>
                             <?php echo $xedap['description'];?>
@@ -184,7 +184,7 @@
                             <a style="cursor: pointer"><?php echo $xemay['services_name'];?></a>
                         </h4>
                         <p style="font-size: 17px">
-                            <b>Giá:</b><?php echo $xemay['price'];?> đ/tháng
+                            <b>Giá: </b><spam class="money"> <?php echo $xemay['price'];?> vnđ/tháng</spam>
                         </p>
                         <p>
                             <?php echo $xemay['description'];?>
@@ -218,7 +218,7 @@
                             <a style="cursor: pointer"><?php echo $vesinh['services_name'];?></a>
                         </h4>
                         <p style="font-size: 17px">
-                            <b>Giá:</b><?php echo $vesinh['price'];?> đ/tháng
+                            <b>Giá: </b><spam class="money"> <?php echo $vesinh['price'];?> vnđ/tháng</spam>
                         </p>
                         <p>
                             <?php echo $vesinh['description'];?>
@@ -304,6 +304,23 @@
             window.location.href = 'thong_tin_ca_nhan.php';
         }
     }
+    // css money
+    document.addEventListener('DOMContentLoaded', function () {
+    function formatCurrency(number) {
+        return number.toLocaleString('vi-VN');
+    }
+
+        var priceElements = document.querySelectorAll('.money');
+
+        priceElements.forEach(function(priceElement) {
+            var priceText = priceElement.textContent;
+            var priceValue = parseInt(priceText.replace(' vnđ/tháng', '').replace(/\./g, ''));
+
+            if (!isNaN(priceValue)) {
+                priceElement.textContent = formatCurrency(priceValue) + ' vnđ/tháng';
+            }
+        });
+    }); 
 </script>
 
 <?php require(__DIR__.'/layouts/footer.php'); ?>

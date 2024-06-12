@@ -78,7 +78,7 @@ if($_SERVER['REQUEST_METHOD'] == 'POST'){
         <div class="breadcrumb-contents">
             <nav aria-label="breadcrumb">
                 <ol class="breadcrumb">
-                    <li class="breadcrumb-item"><a href="index.php">Trang Chủ</a></li>
+                    <li class="breadcrumb-item"><a href="index.php">Trang chủ</a></li>
                     <li class="breadcrumb-item active">Sửa chữa thiết bị</li>
                 </ol>
             </nav>
