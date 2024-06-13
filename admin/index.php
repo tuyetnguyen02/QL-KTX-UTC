@@ -68,7 +68,7 @@ if(isset($_POST['btn_Export'])){
                     </div>
                     <!-- <h4 class="card-title">QUẢN LÝ LOẠI PHÒNG</h4>
                     <li class="breadcrumb-item"><a href="#">Thêm loại phòng</a></li> -->
-                    <table class="table table-hover">
+                    <table class="table table-hover" id="room_type">
                         <thead>
                             <tr>
                                 <th>STT</th>

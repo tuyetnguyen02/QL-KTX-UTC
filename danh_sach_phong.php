@@ -160,10 +160,17 @@
                                         // echo $row['enable'];
                                         $row['room_gender']==$sv['gender'] ? $check_gender="1" : $check_gender="0"; // 1 : trùng gender --- 0 : khác gender
                                         //echo $check_gender;
-                                        if($row['enable'] == 1 && ($roomtype['max_quantity'] - $row['current_quantity']) > 0)
-                                            echo '<button class="btn-dang-ki" onclick="BookingRoom('.$row['room_id'] .', '.$check_gender.', '.$check_contract.')">
+                                        if($row['enable'] == 1 && ($roomtype['max_quantity'] - $row['current_quantity']) > 0){
+                                            if($check_contract == 1){
+                                                echo '<button class="btn-dang-ki" onclick="BookingRoom('.$row['room_id'] .', '.$check_gender.', '.$check_contract.')">
+                                                Đăng ký đổi phòng
+                                                </button>';
+                                            }else{
+                                                echo '<button class="btn-dang-ki" onclick="BookingRoom('.$row['room_id'] .', '.$check_gender.', '.$check_contract.')">
                                             Đăng ký ở
                                             </button>';
+                                            }
+                                        }    
                                     ?>
                                 </td>
                                 
@@ -179,17 +186,19 @@
     </div>
     <script>
         function BookingRoom(roomID, check_gender, check_contract) {
-            if(check_contract == 1){ //check_contract == 1 : đã tồn tại contract chứa studdent_id 
-                alert("Mỗi sinh viên chỉ được đăng kí 1 phòng. Đi đến thông tin cá nhân của bạn?");
-                window.location.href = 'thong_tin_ca_nhan.php';
-            }else{
+            // if(check_contract != 1){ //check_contract == 1 : đã tồn tại contract chứa studdent_id 
                 if(check_gender != 1){ // check_gender = false đưa ra thông báo
                     alert("Phòng không phù hợp với giới tính của bạn. Vui lòng chọn phòng khác!");
                 }else{
                     // Chuyển hướng đến trang khác với tham số truy vấn
                     window.location.href = 'action/dangky_phong.php?room_id=' + roomID;
+                    if(check_contract == 1){
+                        // alert("Mỗi sinh viên chỉ được đăng kí 1 phòng. Đi đến thông tin cá nhân của bạn?");
+                        window.location.href = 'action/thaydoi_phong.php?room_id=' + roomID;
+                    }
                 }
-            }
+            // }else{
+                
         }
         document.addEventListener('DOMContentLoaded', function () {
             function formatCurrency(number) {

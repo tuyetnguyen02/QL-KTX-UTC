@@ -1,14 +1,20 @@
 /* danh sach loai phong */
 .img_admin{
-    width: 220px;
-    height: 150px;
+    width: 180px;
+    height: 120px;
 }
 /* .img_admin img{
     width: 220px;
     height: 150px;
     border-radius: 0%;
 } */
-
+#room_type {
+    width: 100%;
+    /* border-collapse: collapse; */
+}
+#room_type th, #room_type td {  
+     text-align: center; /*Căn chỉnh nội dung ngang */
+}
 
 .chucvu::placeholder{
     opacity: 0.5;

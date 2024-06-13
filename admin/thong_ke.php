@@ -75,8 +75,8 @@ $sum_vesinh =  mysqli_query($conn, $sql_sum_vesinh)->fetch_assoc();
                             <div class="col-xl-3 col-lg-6 col-sm-6 grid-margin stretch-card">
                                 <div class="card">
                                     <div class="card-body text-center">
-                                        <h5 class="mb-2 text-dark font-weight-normal">Số lượng sinh viên đăng ký ở</h5>
-                                        <h2 class="mb-4 text-dark font-weight-bold"><?php echo $sv_dadangky['total_students_registered'] . "/" . $maxquantity['total_capacity'];?></h2>
+                                        <h5 class="mb-2 text-dark font-weight-normal">Doanh thu hiện tại</h5>
+                                        <h2 class="mb-4 text-dark font-weight-bold"><?php echo $sv_dadangky['total_students_registered'] . "sv / " . $maxquantity['total_capacity'] ;?></h2>
                                         <div id="sv_dangky">
                                             
                                         </div>

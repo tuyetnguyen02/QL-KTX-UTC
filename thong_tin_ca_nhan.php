@@ -381,7 +381,7 @@ $total_dichvu = 0;
                         <th>Thanh toán</th>
                     </tr>
                     </thead>
-                    <?php if($contract['status'] == 1){?>
+                    <?php if(isset($contract) && $contract['status'] == 1){?>
                     <tbody>
                         <?php if(isset($bill)){
                             while($row = $bill->fetch_assoc()){?>
