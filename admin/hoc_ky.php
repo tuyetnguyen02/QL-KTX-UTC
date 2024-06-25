@@ -116,7 +116,7 @@ $hocky = queryResult($conn,$sql_hocky);
                                                         </div>
                                                     </div>
                                                     <div class="form-group row col-sm-12">
-                                                        <label style="color:black;" class="col-sm-5 col-form-label">Trạng thái phòng</label>
+                                                        <label style="color:black;" class="col-sm-5 col-form-label">Trạng thái học kỳ</label>
                                                         <div class="col-sm-7    ">
                                                             <select class="form-control" required name="status">
                                                                 <option value="" style="display: none;"></option>
@@ -129,7 +129,7 @@ $hocky = queryResult($conn,$sql_hocky);
                                             </div>
                                             <div class="form-group row">
                                                 <div class="col-12 btn--seve">
-                                                    <button type="submit" class="btn btn-outline-success btn-fw"style=" float: right;"> Tạo phòng </button>
+                                                    <button type="submit" class="btn btn-outline-success btn-fw"style=" float: right;"> Tạo học kỳ </button>
                                                     <!-- <button type="submit" class="btn btn-primary mr-2">Submit</button> -->
                                                 </div>
                                             </div>
@@ -203,7 +203,7 @@ $hocky = queryResult($conn,$sql_hocky);
                                                         </div>
                                                     </div>
                                                     <div class="form-group row col-sm-12">
-                                                        <label style="color:black;" class="col-sm-5 col-form-label">Trạng thái phòng</label>
+                                                        <label style="color:black;" class="col-sm-5 col-form-label">Trạng thái học kỳ</label>
                                                         <div class="col-sm-7    ">
                                                             <select class="form-control" id="status" required name="status">
                                                                 <option value="" style="display: none;"></option>

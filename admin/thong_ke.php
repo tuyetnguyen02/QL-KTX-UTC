@@ -56,6 +56,24 @@ $sql_sum_vesinh = "SELECT COUNT(DISTINCT r.student_id) AS vesinh FROM register_s
                   WHERE r.semester_id = '".$semester['semester_id']."' AND r.services_id = '".$services_vesinh['services_id']."'";
 $sum_vesinh =  mysqli_query($conn, $sql_sum_vesinh)->fetch_assoc();
 
+// thống kê doanh thu
+$sql_sumtotal = "SELECT SUM(total_price) AS sum_price FROM contract WHERE status = 1";
+$sumtotal =  mysqli_query($conn, $sql_sumtotal)->fetch_assoc();
+
+// echo $sumtotal['sum_price'];
+
+$sql_sumrevenue = "SELECT SUM(rt.price * rt.max_quantity * room_counts.total_rooms) AS total_revenue
+                  FROM room_type rt
+                  JOIN (
+                      SELECT room_type_id, COUNT(room_id) AS total_rooms
+                      FROM room
+                      WHERE enable = 1
+                      GROUP BY room_type_id
+                  ) room_counts ON rt.room_type_id = room_counts.room_type_id
+                  WHERE rt.enable = 1;";
+$sumrevenue = mysqli_query($conn, $sql_sumrevenue)->fetch_assoc();
+// echo $sumrevenue['total_revenue'];
+
 
 //echo $maxquantity['total_capacity'];
 ?>
@@ -198,8 +216,8 @@ $sum_vesinh =  mysqli_query($conn, $sql_sum_vesinh)->fetch_assoc();
       function drawChart() {
         var data = google.visualization.arrayToDataTable([
           ['Language', 'Speakers (in millions)'],
-          ['Đã đăng ký',  <?php echo $sv_dadangky['total_students_registered'];?>],
-          ['Còn trống',  <?php echo $maxquantity['total_capacity'] - $sv_dadangky['total_students_registered'];?>]
+          ['Đã đăng ký',  <?php echo $sumtotal['sum_price'];?>],
+          ['Còn trống',  <?php echo $sumrevenue['total_revenue'] - $sumtotal['sum_price'];?>]
         ]);
 
       var options = {
